@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <%= @project.name %>
+</h2>
+
+<p>
+  <b>Description:</b>
+  <%= @project.description %>
+</p>
+
+<p>
+  <b>City:</b>
+  <%= @project.city %>
+</p>
+
+<h4>Liste des administrateurs</h4>
+<% for user in @project.users.where("admin = ?", true) %>
+      -<%= user.name %>
+      <br/>
+<% end %>
+      
+<h4>Liste des non-administrateurs</h4>
+<% for user in @project.users.where("admin = ?", false) %>
+      -<%= user.name %>
+      -<%= link_to "Promote", {:controller => "projects", :action => "promoteuser", :id => @project.id, :iduser => user.id} %>
+      -<%= link_to "Delete", {:controller => "projects", :action => "destroyuser", :id => @project.id, :iduser => user.id} %>
+      <br/>
+<% end %>
+      
+
+<h4>Ajouter des utilisateurs au groupe</h4>
+<p>
+    <% for user in User.all %>
+      <%= link_to user.name, {:controller => "projects", :action => "adduser", :id => @project.id, :iduser => user.id} %>
+      <br/>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

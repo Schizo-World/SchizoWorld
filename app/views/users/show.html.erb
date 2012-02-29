@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<h4>Vos groupes administrés</h4>
+<% for project in @user.projects.where("admin = ?", true) %>
+      -<%= project.name %>
+      <br/>
+<% end %>
+      
+<h4>Les groupes dont vous êtes membre</h4>
+<% for project in @user.projects.where("admin = ?", false) %>
+      -<%= project.name %>
+      <br/>
+<% end %>   
+
+<h4>Créer un groupe</h4>
+<p>
+      <%= link_to "Create a group !", new_project_path(:id => @user.id)%>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

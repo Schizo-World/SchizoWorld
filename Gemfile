@@ -7,30 +7,42 @@ gem 'rails', '3.1.3'
 
 gem 'sqlite3'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'
   gem 'uglifier', '>= 1.0.3'
+  gem 'compass', '0.12.alpha.2'
+  gem 'compass-h5bp'
 end
 
 gem 'jquery-rails'
+gem 'haml-rails'
+gem 'html5-rails', :git => 'git://github.com/sporkd/html5-rails.git'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'configatron'
+gem 'omniauth'
 
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git", :branch => "rails3"
+gem "rmagick"
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+gem 'linecache19', :git => 'git://github.com/mark-moseley/linecache'
+gem 'ruby-debug-base19x', '~> 0.11.30.pre4'
+
+#To use Youtube API
+gem 'youtube_it'
+gem 'inherited_resources'
+gem 'acts_as_commentable'
+gem 'web-app-theme', '>= 0.6.2'
 
 group :test do
   # Pretty printed test output
-  gem 'turn', '0.8.2', :require => false
+  gem 'turn', '~> 0.8.3', :require => false
 end
+
+gem "therubyracer", :require => 'v8'
+
+#To avoid error : Could not determine content-length of response body. Set content-length of the response or set Response#chunked = true
+gem 'thin'

@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-SchizoWorld::Application.config.secret_token = '96abc57fbbc11333626a22e2b59a6c4eca7e195cb77d369c2c9c0374d9fef35e764955ac8c72fbb3f8d2ea81c2803d0194e5a1e601558b3d6cf2f13a7ce78921'
+Schizoworld::Application.config.secret_token = 'e6fe50934aeb6fc3a2c363466d50d6fce1e435351f32ab33893a038116fd80c848ff9171dce77abe23f0c8bb0304d308c25db07b184f187e394e79559c6d1cb3'

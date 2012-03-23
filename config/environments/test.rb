@@ -1,4 +1,4 @@
-SchizoWorld::Application.configure do
+Schizoworld::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # The test environment is used exclusively to run your application's
@@ -36,4 +36,7 @@ SchizoWorld::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Config for Paperclip
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 end

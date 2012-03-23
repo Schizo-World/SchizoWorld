@@ -1,14 +1,104 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>SchizoWorld</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
+<!doctype html>
+
+<html class="no-js" lang="en">
+  
+<%=render :partial => "head"%>
+  
 <body>
 
-<%= yield %>
+  <%=render :partial => "header"%>
+       
+	<div style="display: none;">
+          <div id="form_subscription">
+            <%= render :partial => "users/new", :locals => {:@user => User.new} %>
+          </div>
+	</div>
+  <div style="display: none;">
+          <div id="form_login">
+            <%= render :partial => "sessions/new"%>
+          </div>
+  </div>
+    
+  <%= yield %>
+  
+  <%=render :partial => "footer"%>
+  
+  <script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+  <script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
+  <!-- scripts concatenated and minified via ant build script-->
+  <script defer src="/js/plugins.js"></script>
+  <script defer src="/js/script.js"></script>
+  <!-- end scripts-->
+
+
+  <script> // Change UA-XXXXX-X to be your site's ID
+    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>
+  
+   <script type="text/javascript">
+  	$(document).ready(function() {
+	  $('.scrollin').click(function() {
+	    var offset = $(''+$(this).attr('href')).offset();
+	    if (offset) {
+	      $('html,body').animate({scrollTop: offset.top},'slow');
+	      return false;
+	    }
+	  });
+
+        $("#member_1").click(function() {
+        $("div.member_1").attr('style','left:1200px');
+        $("div.member_1").removeClass("hidden");
+        $('.member_1').animate({left: '0'}, 1000);
+        $("div#shadows").fadeOut('slow');
+        });
+
+        $("#member_2").click(function() {
+        $("div.member_2").attr('style','left:1200px');
+        $("div.member_2").removeClass("hidden");
+        $('.member_2').animate({left: '0'}, 1000);
+        $("div#shadows").fadeOut('slow');
+        });
+
+        $("#member_3").click(function() {
+        $("div.member_3").attr('style','left:1200px');
+        $("div.member_3").removeClass("hidden");
+        $('.member_3').animate({left: '0'}, 1000);
+        $("div#shadows").fadeOut('slow');
+        });
+
+        $("#member_4").click(function() {
+        $("div.member_4").attr('style','left:1200px');
+        $("div.member_4").removeClass("hidden");
+        $('.member_4').animate({left: '0'}, 1000);
+        $("div#shadows").fadeOut('slow');
+        });
+
+        $("#member_5").click(function() {
+        $("div.member_5").attr('style','left:1200px');
+        $("div.member_5").removeClass("hidden");
+        $('.member_5').animate({left: '0'}, 1000);
+        $("div#shadows").fadeOut('slow');
+        });
+
+	  $(".cross").click(function() {
+		    $(this).parent().parent().animate({left: '-2000'}, 1000, function(){
+			    $("div.folder_wrapper").addClass("hidden");
+		    });
+		    $("div#shadows").fadeIn('slow');
+	  });
+
+	  $(".popup").fancybox({
+		  'titlePosition'		: 'inside',
+		  'transitionIn'		: 'none',
+		  'transitionOut'		: 'none'
+	  });
+
+	});
+  </script>
+  
 </body>
 </html>

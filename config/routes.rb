@@ -1,4 +1,28 @@
-SchizoWorld::Application.routes.draw do
+Schizoworld::Application.routes.draw do
+
+  match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
+
+  resource :session, :only => [:new, :create, :destroy, :provider, :failure]
+  resources :sessions
+  resources :users
+  resources :projects
+
+  match 'login' => 'sessions#new', :as => :login
+  match 'logout' => 'sessions#destroy', :as => :logout
+  match 'signup' => 'users#new', :as => :signup
+  match 'register' => 'users#create', :as => :register
+
+  match '/auth/:provider/callback', :to => 'sessions#provider'
+  match '/auth/failure', :to => 'sessions#failure'
+
+  match 'profile' => 'users#index', :as => :profile
+  
+  #project
+  match ':controller(/:action(/:id(.:format)))'
+  
+  # Root
+  root :to => "application#index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

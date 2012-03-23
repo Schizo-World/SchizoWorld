@@ -1,4 +1,4 @@
-SchizoWorld::Application.configure do
+Schizoworld::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
@@ -57,4 +57,7 @@ SchizoWorld::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  # Config for Paperclip
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 end

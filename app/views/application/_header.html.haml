@@ -1,0 +1,52 @@
+#header_over.center_content_wrapper
+  .center_wrapper
+    /
+      %a{:href => "#"}
+    /
+      %img#logo{:alt => "It's a Small Schizophrenic World", :src => "/img/logo.png"}/
+
+%header.center_content_wrapper{:role => "masthead"}
+  %nav.center_wrapper
+    %a{:href => "/"}
+      %img#logo_small{:alt => "It's a Small Schizophrenic World", :src => "/img/logo_small.png"}/
+    %ul#main_nav
+      - if logged_in?
+        %li
+          %a{:href => "/"} Home
+        %li|
+        %li
+          %a{:href => "#feed"} Feed
+        %li|
+        %li
+          %a{:href => "#messages"} Messages
+        %li.notification 12
+
+      - else
+        %li#l-home
+          %a.scrollin{:href => "/"} Home
+        %li|
+        %li#l-project
+          %a.scrollin{:href => "#project"} The Project
+        %li|
+        %li#l-team
+          %a.scrollin{:href => "#team"} Our Team
+
+    %ul#subscription
+      - if logged_in?
+        %li
+          %a{:href => "/profile"}= current_user.login
+
+        %li.dot
+        %li
+          %a{:href => "/logout"} logout
+
+      - else
+        %li
+          %a.popup{:href => "#form_subscription"} subscribe
+        %li.dot
+        %li
+          %a.popup{:href => "#form_login"}login
+
+    %form#searchBar
+      %input#searchField{:type => "text", :name => "searchField"}
+      %input#searchIcon{:type => "submit", :name => "validSearch", :value => "search"}

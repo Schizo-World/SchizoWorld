@@ -1,0 +1,118 @@
+<div id="sky">
+  <div id="container" class="socialContainer">
+    <a href="<%= project_path(@project) %>"><%= image_tag @project.avatar_project.url(:large), :class => "img_sheet" %></a>
+    <h1><a href="<%= project_path(@project) %>"><%= @project.name %></a></h1>
+
+    <div class="left info_sup">
+      <div class="info">
+        <img src="/img/icons/pencil.png" alt="" class="left"/>
+        <p><%=link_to 'Editer la fiche projet', edit_project_path(@project)%></p>
+      </div>
+      <div class="info">
+        <img src="/img/icons/file.png" alt="" class="left"/>
+        <p><%=link_to 'Voir la fiche publique', :controller => "projects", :action => "show", :public => true%></p>
+      </div>
+      <br/><br/>
+
+      <% if @project.city %>
+        <div class="info">
+          <img src="/img/icons/location.png" alt="" class="left"/>
+          <p><%= @project.city %></p> 
+        </div>
+      <%end%>
+
+      <% if @project.status %>
+        <div class="info">
+          <img src="/img/icons/process.png" alt="" class="left"/>
+          <p><%= @project.status %></p> 
+        </div>
+      <%end%>  
+      <br/>
+      
+      <div class="project_members">
+        <% for user in @project.users %>
+            <% if user.url_img != nil%>
+              <a href="<%= user_path(user) %>"><%= image_tag user.url_img << "=small", :alt => user.login, :class => "left thumb_facebook" %></a>
+            <% else %>
+              <a href="<%= user_path(user) %>"><%= image_tag user.avatar.url(:thumb), :class => "left" %></a>
+            <% end %>
+            <p class="left"><%= user.login %></p>
+            <div class="clear"></div>
+        <% end %> 
+      </div>     
+
+    </div>
+
+    <div class="right" id="social_content">
+      <div id="socialMenu">
+            <ul id="tabs">
+              <li class="active">
+                <a alt="#communicate" class="tab_menu"> Communiquer </a>
+              </li>
+              <li>
+                <a alt="#doc" class="tab_menu"> Documents </a>
+              </li>
+              <li>
+                <a alt="#ad" class="tab_menu"> Annonces </a>
+              </li>
+            </ul>
+          </div>
+          <div id="content">
+            <p id="notice"><%= notice %></p>
+
+            <div id="communicate" class="tab_content">
+              <div class="write_msg">
+                <% if current_user.url_img != nil%>
+                  <a href="<%= user_path(current_user) %>"><%= image_tag current_user.url_img << "=small", :alt => current_user.login, :class => "left" %></a>
+                <% else %>
+                  <a href="<%= user_path(current_user) %>"><%= image_tag current_user.avatar.url(:small), :class => "left" %></a>
+                <% end %>
+                <%= form_for(@project) do |f| %>
+                  <%= f.text_area :message, :value => "Rédiger un message..." %>
+                <% end %>
+              </div>
+            </div>
+
+            <div id="doc" class="tab_content hidden">
+              <p>documents</p>
+            </div>
+
+            <div id="ad" class="tab_content hidden">
+              <p>annonces</p>
+            </div>
+
+              <!--<h4>Liste des administrateurs</h4>
+              <% for user in @project.users.where("admin = ?", true) %>
+                    -<%= user.login %>
+                    <br/>
+              <% end %>
+
+              <h4>Liste des non-administrateurs</h4>
+              <% for user in @project.users.where("admin = ?", false) %>
+                    -<%= user.login %>
+                    
+                    <% if @project.users.where("admin = ?", true).include? (current_user) %>          
+                      -<%= link_to "Promote", {:controller => "projects", :action => "promoteuser", :id => @project.id, :iduser => user.id} %>
+                      -<%= link_to "Delete", {:controller => "projects", :action => "destroyuser", :id => @project.id, :iduser => user.id} %>
+                    <%  end %>
+                      
+                    <br/>
+              <% end %>
+              
+              <% if @project.users.where("admin = ?", true).include? (current_user) %>          
+              <h4>Ajouter des utilisateurs au groupe</h4>
+                <p>
+                    <% for user in User.all %>
+                      <%= link_to user.login, {:controller => "projects", :action => "adduser", :id => @project.id, :iduser => user.id} %>
+                      <br/>
+                  <% end %>
+                </p>
+                    
+                <%= link_to 'Edit', edit_project_path(@project) %> |
+                <%= link_to 'Back', projects_path %>
+              <% end %>-->
+          </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

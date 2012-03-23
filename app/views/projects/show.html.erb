@@ -1,0 +1,6 @@
+  <% if params[:public] == nil %>
+    <%= render 'privateProject' %>
+  <% else %>
+    <%= render 'publicProject' %>
+  <% end %>
+  <!--if (@project.users.include? (current_user) && params[:public] == true )-->

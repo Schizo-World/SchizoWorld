@@ -1,0 +1,47 @@
+<div id="sky">
+  <div id="container" class="socialContainer">
+    <a href="/profile">
+      <img class="img_sheet" src="<%= @user.avatar.url(:large) %>" alt="<%= @user.login %>"/>
+    </a>
+    <h1><%= link_to @user.login, user_path(@user) %></h1>
+
+    <div class="left info_sup">
+      <%=link_to 'Editer la fiche projet', edit_user_path(@user)%>
+
+      <% if @user.location %>
+        <p><%= @user.location %></p>
+      <% end %>
+ 
+ <!-- <%= render 'form' %>-->
+
+      <% if @user.status %>
+        <p><%= @user.status %></p>
+      <% end %>
+
+    </div>
+
+    <div id="social_content" class="right">
+      <div id="socialMenu">
+        <ul id="tabs">
+          <li class="active">
+            <a href="#"> Communiquer </a>
+          </li>
+          <li>
+            <a href="#"> Documents </a>
+          </li>
+          <li>
+            <a href="#"> Annonces </a>
+          </li>
+        </ul>
+      </div>
+
+      <div id="content">
+		  <h1>New project</h1>
+		  <%= render 'formCreation' %>
+	  </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>
+
+</div>

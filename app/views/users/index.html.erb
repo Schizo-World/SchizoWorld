@@ -1,0 +1,106 @@
+<div style="display: none;">
+  <div id="form_new_project">
+    <%= render :partial => "projects/new", :locals => {:@project => Project.new} %>
+  </div>
+</div>
+<div id="sky">
+	<div id="container" class="socialContainer">
+		<% if @user.url_img != nil%>
+			<a href="<%= :profile %>"><%= image_tag @user.url_img << "=large", :alt => @user.login, :class => "img_sheet" %></a>
+    	<% else %>
+			<a href="<%= :profile %>"><%= image_tag @user.avatar.url(:large), :class => "img_sheet" %></a>
+		<% end %>
+		<h1><a href="<%= :profile %>"><%= @user.login %></a></h1>
+		<div id="jobs">
+			<% for job in @user.jobs%>
+		      	<span>#<%= job.label %></span>
+		    <% end %>
+	    </div>
+
+		<div class="left info_sup">
+			<div class="info">
+				<img src="/img/icons/pencil.png" alt="" class="left"/>
+				<p><%=link_to 'Editer mon profil', edit_user_path(@user)%></p>
+			</div>
+			<div class="info">
+				<img src="/img/icons/pencil.png" alt="" class="left"/>
+				<p><%= link_to "Create a project", "#form_new_project", :class => "popup"%></p>
+			</div>
+            <br/><br/>
+
+			<% if !@user.location.nil? && !@user.location.empty?%>
+				<div class="info">
+					<img src="/img/icons/location.png" alt="" class="left"/>
+					<p><%= @user.location %></p> 
+				</div>
+			<%end%>
+
+			<% if !@user.status.nil? && !@user.status.empty? %>
+				<div class="info">
+					<img src="/img/icons/bubble.png" alt="" class="left"/>
+					<p><%= @user.status %></p> 
+				</div>
+			<%end%>
+			<br/><br/>
+
+			<% if !@user.links.nil? && !@user.links.empty? %>
+				<div class="info">
+					<img src="/img/icons/suitcase.png" alt="" class="left"/>
+					<% link_splitted = @user.links.split(' ') %>
+					<% for link in link_splitted %>
+						<p><%= link %></p>
+					<% end %>
+				</div>
+			<%end%>          
+
+		</div>
+
+		<div class="right" id="social_content">
+			<div id="socialMenu">
+	        	<ul id="tabs">
+		          <li class="active">
+		            <a alt="#projects_in_progress" class="tab_menu"> Projets en cours </a>
+		          </li>
+		          <li>
+		            <a alt="#projects_overed" class="tab_menu"> Projets terminés </a>
+		          </li>
+		          <li>
+		            <a alt="#ad" class="tab_menu"> Annonces </a>
+		          </li>
+	        	</ul>
+	        </div>
+	        <div id="content">
+                <div id="projects_in_progress" class="tab_content">
+				  <% for project in @user.projects.order("created_at DESC") %>
+                	<div class="project_list">
+	            	    <a href="<%= project_path(project) %>"><%= image_tag project.avatar_project.url(:large), :class => "left" %></a>
+	            	    <div>
+		                    <h3><%= link_to project.name, project_path(project) %></h3>
+		            	    <p><%= truncate(project.description, :length => 200, :omission => '...') %></p>
+		            	    <p class="send_mail"><img src="#" alt=""/><a href="#">Envoyer un message</a></p>
+	            		</div>
+	                    <div class="clear"></div>
+                	</div>
+                  <% end %>
+				</div>
+
+				<div id="projects_overed" class="tab_content hidden">
+				  <p>projects_overed</p>
+				</div>
+
+				<div id="ad" class="tab_content hidden">
+				  <p>ad</p>
+				</div>
+
+                <!--<h4>Les groupes dont vous êtes membre</h4>
+                <% for project in @user.projects.where("admin = ?", false) %>
+                	  <a href="<%= :profile %>"><%= image_tag @user.avatar.url(:large), :class => "left" %></a>
+                	  <h3><%= link_to project.name, project_path(project) %></h3>
+                	  <p><%= project.description %></p>
+                      <br/>
+                <% end %>-->
+	        </div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>

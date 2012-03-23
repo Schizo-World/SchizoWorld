@@ -1,0 +1,97 @@
+#sky
+  #container.socialContainer
+    - if @user.url_img 
+      %a{:href => "/profile"}
+        %img.img_sheet{ :src => @user.url_img << "=large", :alt => @user.login}
+    - else
+      %a{:href => "/profile"}
+        %img.img_sheet{ :src => @user.avatar.url(:large), :alt => @user.login}
+    %h1 
+      = link_to @user.login, :profile
+    #jobs
+      -for job in @user.jobs
+        %span
+          ="#" << job.label
+
+    .left.info_sup
+      .info
+        %img.left{ :src => "/img/icons/pencil.png", :alt => ""}
+        %p
+          =link_to 'Editer mon profil', edit_user_path(@user)
+      .info
+        %img.left{ :src => "/img/icons/pencil.png", :alt => ""}
+        %p
+          =link_to "Create a project", new_project_path
+      %br/
+      %br/
+
+      - if !@user.location.nil? && !@user.location.empty?
+        .info
+          %img.left{ :src => "/img/icons/location.png", :alt => ""}
+          %p 
+            = @user.location
+
+      - if !@user.status.nil? && !@user.status.empty?
+        .info
+          %img.left{ :src => "/img/icons/bubble.png", :alt => ""}
+          %p 
+            = @user.status
+      %br/
+      %br/
+
+      - if !@user.links.nil? && !@user.links.empty?
+        .info
+          %img.left{ :src => "/img/icons/suitcase.png", :alt => ""}
+          - link_splitted = @user.links.split(' ')
+          - for link in link_splitted
+            %p
+              = link
+
+    #social_content.right
+      #socialMenu
+        %ul#tabs
+          %li
+            %a{:alt => "#projects_in_progress" , :class => "tab_menu"} Projets en cours
+          %li
+            %a{:alt => "#projects_overed", :class => "tab_menu"} Projets terminés
+          %li
+            %a{:alt => "#ad", :class => "tab_menu"} Annonces
+      #content
+        #form
+          %h4 Informations générales
+          = render 'form'
+
+          %br/
+          %br/
+
+          .job_box
+            %h4 Mes jobs
+            - for job in @user.jobs.where("project_id IS NULL")
+              =job.label
+              \-
+              = link_to image_tag("/img/icons/delete.png", :alt => "baba", :class => "delete"), {:action => "destroyjob", :id => @user.id, :idjob => job.id}
+              %br/
+            = render 'formJob'
+
+        #projects_in_progress.tab_content.hidden
+          - for project in @user.projects.order("created_at DESC")
+            .project_list
+              %a{ :href => project_path(project)}
+                = image_tag project.avatar_project.url(:large), :class => "left"
+              %div
+                %h3
+                  = link_to project.name, project_path(project)
+                %p
+                  = truncate(project.description, :length => 200, :omission => '...')
+                %p.send_mail 
+                  %img{ :src => "#", :alt => ""}
+                  %a{ :href => "#"} Envoyer un message
+              .clear
+
+        #projects_overed.tab_content.hidden
+          %p projects_overed
+
+        #ad.tab_content.hidden
+          %p ad
+
+    .clear

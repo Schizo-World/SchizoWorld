@@ -1,0 +1,15 @@
+= form_for @project, :html => { :multipart => true }, :url => {:action => "addjob", :id => @project} do |f|
+  -if @project.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :Ajouter_un_job
+    = collection_select(:user_job, :job_id, Job.all, :id, :label, :prompt => 'Selectionner un job')
+  .field
+    = f.hidden_field(:user_id, :value => iduser)
+  .actions
+    = f.submit 'Addjob'

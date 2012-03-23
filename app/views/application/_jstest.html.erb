@@ -1,0 +1,107 @@
+  <div id="folder_content">
+  	<section id="team" class="center_content_wrapper">
+        <div class="center_wrapper">
+
+          <div id="shadows">
+            <img id="member_1" alt="" src="img/shadow_charly_mini.png"/>
+          </div>
+
+          <div class="member_1 folder_wrapper hidden">
+            <img class="shadow_folder" alt="" src="img/shadow_charly.png"/>
+            <div class="folder">
+              <img class="cross" alt="" src="img/cross.png"/>
+              <h4> Charly Kraft </h4>
+              <h5> Administrator, Director </h5>
+              <p> Charly Kraft est un réalisateur en herbe. Extrêmement sérieux et doué en tout, ce jeune touche-à-tout a fait de nombreux court-métrages dans sa jeunesse qui lui ont valu l’admiration de tous à l’école d’ingénieur IMAC. Il est l’un des deux réalisateurs du projet SSW.</p>
+              <div class="profil">
+                <img alt="" src="img/profil.png"/>
+                <a href="#"> Voir le profil </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+    </section>
+  <div>
+
+  <script type="text/javascript" src="./fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+  <script type="text/javascript" src="./fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+
+  <!-- scripts concatenated and minified via ant build script-->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <!-- end scripts-->
+
+
+  <script> // Change UA-XXXXX-X to be your site's ID
+    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>
+  
+   <script type="text/javascript">
+  	$(document).ready(function() {
+
+  	  alert("oeil");
+
+	  $('.scrollin').click(function() {
+	    var offset = $(''+$(this).attr('href')).offset();
+	    if (offset) {
+	      $('html,body').animate({scrollTop: offset.top},'slow');
+	      return false;
+	    }
+	  });
+
+        $("#member_1").click(function() {
+        	alert('click');
+			$("div.member_1").attr('style','left:1200px');
+			$("div.member_1").removeClass("hidden");
+			$('.member_1').animate({left: '0'}, 1000);
+			$("div#shadows").fadeOut('slow');
+		});
+
+        $("#member_2").click(function() {
+			$("div.member_2").attr('style','left:1200px');
+			$("div.member_2").removeClass("hidden");
+			$('.member_2').animate({left: '0'}, 1000);
+			$("div#shadows").fadeOut('slow');
+		});
+
+        $("#member_3").click(function() {
+			$("div.member_3").attr('style','left:1200px');
+			$("div.member_3").removeClass("hidden");
+			$('.member_3').animate({left: '0'}, 1000);
+			$("div#shadows").fadeOut('slow');
+		});
+
+        $("#member_4").click(function() {
+			$("div.member_4").attr('style','left:1200px');
+			$("div.member_4").removeClass("hidden");
+			$('.member_4').animate({left: '0'}, 1000);
+			$("div#shadows").fadeOut('slow');
+		});
+
+        $("#member_5").click(function() {
+			$("div.member_5").attr('style','left:1200px');
+			$("div.member_5").removeClass("hidden");
+			$('.member_5').animate({left: '0'}, 1000);
+			$("div#shadows").fadeOut('slow');
+		});
+
+	    $(".cross").click(function() {
+		    $(this).parent().parent().animate({left: '-2000'}, 1000, function(){
+			    $("div.folder_wrapper").addClass("hidden");
+		    });
+		    $("div#shadows").fadeIn('slow');
+	    });
+
+	    $("#popup").fancybox({
+		  'titlePosition'		: 'inside',
+		  'transitionIn'		: 'none',
+		  'transitionOut'		: 'none'
+	    });
+
+
+	});
+  </script>

@@ -1,0 +1,35 @@
+#header_over.center_content_wrapper
+  .center_wrapper
+
+%header.center_content_wrapper{:role => "masthead"}
+  %nav.center_wrapper
+    %a{:href => "/"}
+      %img#logo_small{:alt => "It's a Small Schizophrenic World", :src => "img/logo_small.png"}/
+    %ul#main_nav
+      %li#l-home
+        %a.scrollin{:href => "/"} Home
+      %li|
+      %li#l-project
+        %a.scrollin{:href => "#project"} The Project
+      %li|
+      %li#l-team
+        %a.scrollin{:href => "#team"} Our Team
+
+    %ul#subscription
+      - if !logged_in? 
+        %li
+          %a.various{:href => "signup"} subscribe
+        %li.dot  
+        %li
+          %a{:href => "login"} login
+      - else
+        %li
+          %a{:href => "profile"}= current_user.login
+        %li.notification 12
+        %li.dot
+        %li
+          %a{:href => "logout"} logout
+
+    %form#searchBar
+      %input#searchField{:type => "text", :name => "searchField"}
+      %input#searchIcon{:type => "submit", :name => "validSearch", :value => "search"}

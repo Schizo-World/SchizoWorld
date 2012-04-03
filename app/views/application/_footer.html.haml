@@ -1,4 +1,11 @@
-%footer
+-if !params[:search].nil?
+  -footer_class = "social"
+-else 
+  -footer_class = "water"
+%footer{:id => footer_class}
+  -if !params[:search].nil?
+    #grass_footer
+    #grass_root_footer
   %p It's a small schizophrenic world
   %p
     fork me on

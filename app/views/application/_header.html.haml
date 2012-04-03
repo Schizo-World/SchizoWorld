@@ -35,7 +35,6 @@
       - if logged_in?
         %li
           %a{:href => "/profile"}= current_user.login
-
         %li.dot
         %li
           %a{:href => "/logout"} logout
@@ -47,6 +46,10 @@
         %li
           %a.popup{:href => "#form_login"}login
 
-    %form#searchBar
-      %input#searchField{:type => "text", :name => "searchField"}
-      %input#searchIcon{:type => "submit", :name => "validSearch", :value => "search"}
+    =form_tag('/application/results', :method => 'get', :id => 'searchBar') do
+      %p
+        = text_field_tag :search, params[:search], :id => 'searchField'
+        = submit_tag "Search", :name => nil, :id => 'searchIcon'
+
+
+

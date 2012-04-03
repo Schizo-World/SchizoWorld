@@ -7,9 +7,8 @@
           %li= msg
 
   .field
-    = f.label :Ajouter_un_job
-    = collection_select(:user_job, :job_id, Job.all, :id, :label, :prompt => 'Selectionner un job')
+    = collection_select(:user_job, :job_id, Job.all, :id, :label, :prompt => 'Sélectionner un job')
   .field
     = f.hidden_field(:user_id, :value => iduser)
   .actions
-    = f.submit 'Addjob'
+    = f.submit 'Ajouter un job'

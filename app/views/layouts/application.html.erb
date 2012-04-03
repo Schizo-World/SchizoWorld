@@ -18,9 +18,11 @@
             <%= render :partial => "sessions/new"%>
           </div>
   </div>
-    
-  <%= yield %>
   
+  <div class="wrap">
+    <%= yield %>
+  </div>
+
   <%=render :partial => "footer"%>
   
   <script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
@@ -96,6 +98,19 @@
 		  'transitionIn'		: 'none',
 		  'transitionOut'		: 'none'
 	  });
+
+    $(".tab_menu").click(function(){
+      var content_display = $("li.active").children().attr("alt");
+      $(content_display).addClass("hidden"); 
+      $("li.active").removeClass("active");
+
+      $("#form").addClass("hidden");
+      $("#form_job").addClass("hidden");
+
+      var href = $(this).attr("alt");
+      $(this).parent().addClass("active");
+      $(href).removeClass("hidden");
+    });
 
 	});
   </script>

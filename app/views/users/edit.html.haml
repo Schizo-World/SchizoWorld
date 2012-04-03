@@ -9,7 +9,7 @@
     %h1 
       = link_to @user.login, :profile
     #jobs
-      -for job in @user.jobs
+      -for job in @user.jobs.where("project_id IS NULL")
         %span
           ="#" << job.label
 
@@ -64,14 +64,14 @@
           %br/
           %br/
 
-          .job_box
-            %h4 Mes jobs
-            - for job in @user.jobs.where("project_id IS NULL")
-              =job.label
-              \-
-              = link_to image_tag("/img/icons/delete.png", :alt => "baba", :class => "delete"), {:action => "destroyjob", :id => @user.id, :idjob => job.id}
-              %br/
-            = render 'formJob'
+        #form_job
+          %h4 Mes jobs
+          - for job in @user.jobs.where("project_id IS NULL")
+            .job_box
+              %p
+                =job.label << " "
+                = link_to image_tag("/img/icons/delete.png", :alt => "baba", :class => "delete"), {:action => "destroyjob", :id => @user.id, :idjob => job.id}
+          = render 'formJob'
 
         #projects_in_progress.tab_content.hidden
           - for project in @user.projects.order("created_at DESC")

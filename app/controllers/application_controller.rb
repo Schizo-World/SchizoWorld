@@ -4,7 +4,11 @@ class ApplicationController < ActionController::Base
 
 	protect_from_forgery
 
-	def index
-	end
+    def results
+      @projects = Project.search(params[:search])
+      @users = User.search(params[:search])
+    end
+
+
 
 end

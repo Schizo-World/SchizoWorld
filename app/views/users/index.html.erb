@@ -12,7 +12,7 @@
 		<% end %>
 		<h1><a href="<%= :profile %>"><%= @user.login %></a></h1>
 		<div id="jobs">
-			<% for job in @user.jobs%>
+			<% for job in @user.jobs.where("project_id IS NULL")%>
 		      	<span>#<%= job.label %></span>
 		    <% end %>
 	    </div>

@@ -8,6 +8,21 @@ body {
     font-family: 'Asap',sans-serif;
 }
 
+html, body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+
+footer#social, .push {
+    height: 4em;
+}
+
 article,
 aside,
 details,
@@ -745,17 +760,14 @@ form.new_project {
 	font-size:13px;
 }
 
-.edit_user #job_list_edit {
-	float: right;
-    margin: 0 485px 7px 0;
-}
-
 .edit_user .job_box {
 	width:143px;
 }
 
 .job_box .delete {
 	width:18px;
+    position: relative;
+    top: 3px;
 }
 
 .edit_user .job_box p {
@@ -789,6 +801,36 @@ form.new_project {
     float: left;
     margin: 0 0 0 104px;
 	background:#fff;
+}
+
+#edit_project_2 {
+    margin:0 0 0 7px;
+}
+
+#form_job .edit_user select, #form_job .edit_project select{
+    border:1px solid #D9D9F3;
+    margin:2px 10px 0 0;
+    float:left;
+    background:#fff;
+}
+
+#form_job .edit_user input[type="submit"], #form_job .edit_project input[type="submit"] {
+    float:left;
+    margin:0;
+}
+
+#form_job img.left {
+    margin:0 10px 10px 0;
+}
+
+#form_job p {
+    font-size:15px;
+}
+
+#form_job .job_box span {
+    font-size:13px;
+    position:relative;
+    bottom:5px;
 }
 
 .new_project input {
@@ -940,11 +982,58 @@ form.new_project {
 	width:400px;
 }
 
+/*----------------------------------------------------------------------------*/
+/*--------------------------------- SEARCH -----------------------------------*/
+/*----------------------------------------------------------------------------*/
+#sky_search { 
+    background: url(/img/background_sky_search.jpg) repeat-x;
+    min-width:900px;
+}
+
+h1#search_result {
+    padding:0;
+    text-transform:none;
+}
+
+#search_content {
+    margin:65px 0 0 0;
+}
+
+#search_content .category {
+    margin:0 0 35px 0;
+    width:430px;
+}
+
+.category p {
+    font-size:13px;
+    text-align:justify;
+    margin:10px 0 0 0;
+}
+
+.category img {
+    margin:0 7px 10px 0;
+}
+
+.category h4 {
+    margin:0 0 15px 0;
+    border-bottom:1px solid #000;
+}
+
+.category .tags {
+    font-size:12px;
+    color: #666666;
+    position:relative;
+    bottom:5px;
+}
+
+.category .grey {
+    color: #666666;
+}
 
 /*----------------------------------------------------------------------------*/
 /*--------------------------------- FOOTER -----------------------------------*/
 /*----------------------------------------------------------------------------*/
-footer { 
+footer#water { 
 	background: url(/img/background_water.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;

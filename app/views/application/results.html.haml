@@ -1,0 +1,54 @@
+#sky_search
+  #container.socialContainer
+    - sentence_singular = "résultat trouvé dans "
+    - sentence_plural = "résultat(s) trouvé(s) dans "
+   
+    %h1#search_result
+      Résultats pour
+      = '"' << params[:search] << '"'
+
+    #search_content
+      .category.left
+        %h4 
+          = @projects.count 
+          -if @projects.count > 1
+            = sentence_plural
+          -else 
+            = sentence_singular
+          %span.grey Projets
+        -if !@projects.blank?
+          -for project in @projects
+            .clear
+              %a{:href => project_path(project)}
+                = image_tag project.avatar_project.url(:medium), :alt => project.name, :class => "left"
+              %h3
+                = project.name
+              %p
+                = truncate(project.description, :length => 200, :omission => '...')
+        .clear
+
+      .category.right
+        %h4 
+          = @users.count 
+          -if @users.count > 1
+            = sentence_plural
+          -else 
+            = sentence_singular
+          %span.grey Users
+        -if !@users.blank?
+          -for user in @users
+            .clear
+              -if user.url_img != nil
+                %a{:href => user_path(user)}
+                  = image_tag user.url_img << "=medium", :alt => user.login, :class => "left"
+              -else
+                %a{:href => user_path(user)}
+                  = image_tag user.avatar.url(:medium), :class => "left"
+              %h3
+                = user.login
+              -for job in user.jobs.where("project_id IS NULL")
+                %span.tags
+                  = "#" << job.label
+      .clear
+      .push
+

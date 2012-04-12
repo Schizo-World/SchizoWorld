@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @announce.title
+%p
+  %b Location:
+  = @announce.location
+%p
+  %b Job:
+  = @announce.job_id
+%p
+  %b Description:
+  = @announce.description
+
+= link_to 'Edit', edit_announce_path(@announce)
+\|
+= link_to 'Back', announces_path

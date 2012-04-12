@@ -9,6 +9,4 @@ class ApplicationController < ActionController::Base
       @users = User.search(params[:search])
     end
 
-
-
 end

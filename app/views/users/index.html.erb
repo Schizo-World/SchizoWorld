@@ -88,9 +88,14 @@
 				  <p>projects_overed</p>
 				</div>
 
-				<div id="ad" class="tab_content hidden">
-				  <p>ad</p>
-				</div>
+                                <div id="ad" class="tab_content hidden">
+                                  <%= render :partial => "announces/new", :locals => {:@announce => Announce.new, :author_type => '0'} %>
+                                  <%if !@announces.blank?%>
+                                    <% for announce in @announces %>
+                                      <p><%= announce.title %></p>
+                                    <% end %>
+                                  <% end %>
+                                </div>
 
                 <!--<h4>Les groupes dont vous êtes membre</h4>
                 <% for project in @user.projects.where("admin = ?", false) %>

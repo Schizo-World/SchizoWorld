@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     if current_user != nil
       @user = User.find(current_user.id);
     end
+    @announces = Announce.where("author_id = ? AND author_type = ?", current_user.id, '0')
   end
 
   # render new.rhtml
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
 
   def show 
     @user = User.find(params[:id])
+    @announces = Announce.find(:all)
   end
 
   def edit

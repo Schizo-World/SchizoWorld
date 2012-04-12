@@ -1,0 +1,28 @@
+%h1 Listing announces
+
+%table
+  %tr
+    %th Title
+    %th Location
+    %th Tag
+    %th Description
+    %th Author
+    %th Author type
+    %th Statut
+    %th
+    %th
+    %th
+
+  - @announces.each do |announce|
+    %tr
+      %td= announce.title
+      %td= announce.location
+      %td= announce.job_id
+      %td= announce.description
+      %td= link_to 'Show', announce
+      %td= link_to 'Edit', edit_announce_path(announce)
+      %td= link_to 'Destroy', announce, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Announce', new_announce_path

@@ -87,7 +87,10 @@
         </div>
 
         <div id="ad" class="tab_content hidden">
-          <p>ad</p>
+          <%= render :partial => "announces/new", :locals => {:@announce => Announce.new} %>
+          <% for announce in @announces %>
+            <p><%= announce.title %></p>
+          <% end %>
         </div>
 
         <!--<h4>Les groupes dont vous êtes membre</h4>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: 
+  location: 
+  tag_id: 1
+  description: 
+  author_id: 1
+  author_type: 1
+  statut: 1
+
+two:
+  title: 
+  location: 
+  tag_id: 1
+  description: 
+  author_id: 1
+  author_type: 1
+  statut: 1

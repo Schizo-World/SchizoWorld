@@ -1,6 +1,9 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  
+  has_many :announces, :foreign_key => "author_id"
+  
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken

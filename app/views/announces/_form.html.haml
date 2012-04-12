@@ -1,0 +1,22 @@
+= form_for @announce do |f|
+  -if @announce.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@announce.errors.count, "error")} prohibited this announce from being saved:"
+      %ul
+        - @announce.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :location
+    = f.text_field :location
+  .field
+    = f.label "job"
+    = f.number_field :job_id
+  .field
+    = f.label :description
+    = f.text_area :description
+  .actions
+    = f.submit 'Save'

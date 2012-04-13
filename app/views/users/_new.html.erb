@@ -1,4 +1,4 @@
-<div id="container" class="subscription">
+<div id="container" class="subscription popup_subscription">
 	<div id="signup">
 		<h1>Sign up as a new user</h1>
 		<div class="left" id="description">
@@ -36,13 +36,13 @@
 				<p><%= label_tag 'email' %>
 				<%= f.text_field :email %></p>
 
-				<p><%= label_tag 'password' %>
+				<p><%= label_tag 'mot de passe' %>
 				<%= f.password_field :password %></p>
 
-				<p><%= label_tag 'password_confirmation', 'Confirm Password' %>
+				<p><%= label_tag 'password_confirmation', 'confirmation du mot de passe' %>
 				<%= f.password_field :password_confirmation %></p>
 
-				<p><%= submit_tag 'Sign up' %></p>
+				<p><%= submit_tag "S'inscrire" %></p>
 				<% end -%>
 			</div>
 		</div>

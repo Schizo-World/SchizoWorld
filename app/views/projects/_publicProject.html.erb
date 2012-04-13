@@ -42,6 +42,9 @@
           <li>
             <a alt="#project_description" class="tab_menu"> Description </a>
           </li>
+          <li>
+            <a alt="#ad" class="tab_menu"> Leurs annonces </a>
+          </li>
         </ul>
       </div>
 
@@ -55,6 +58,35 @@
         <div id="project_description" class="tab_content hidden">
           <p><%= @project.description %></p>
         </div>
+
+        <div id="ad" class="tab_content hidden">
+          <%if !@announces.blank?%>
+            <div id="announces">
+              <h4>Nos annonces</h4>
+                <% for announce in @announces %>
+                  <div class="announce">
+                      <a href="<%= project_path(@project) %>"><%= image_tag @project.avatar_project.url(:medium), :class => "left" %></a>
+                      <p class="send_mail"><img src="#" alt=""/><a href="#">Postuler</a></p>
+                      <div>
+                        <h3><%= announce.title%></h3>
+                        <% job = Job.find(announce.job_id) %>
+                        <p>
+                            <span>#<%= job.label %></span>
+                        </p>
+                        <p>
+                            <img src="/img/icons/location.png" alt=""/>
+                            <span><%= announce.location %></span>
+                        </p>
+                        <p class="description"><%= announce.description %></p>
+                        <div class="clear"></div>
+                      </div>
+                  </div>
+                  <div class="clear"></div>
+                <% end %>
+            </div>
+          <% end %>
+        </div>
+
 
         <!--<h4>Liste des administrateurs</h4>
         <% for user in @project.users.where("admin = ?", true) %>

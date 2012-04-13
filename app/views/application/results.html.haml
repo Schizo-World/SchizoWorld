@@ -1,7 +1,7 @@
 #sky_search
   #container.socialContainer
     - sentence_singular = "résultat trouvé dans "
-    - sentence_plural = "résultat(s) trouvé(s) dans "
+    - sentence_plural = "résultats trouvés dans "
    
     %h1#search_result
       Résultats pour
@@ -34,7 +34,7 @@
             = sentence_plural
           -else 
             = sentence_singular
-          %span.grey Users
+          %span.grey Utilisateurs
         -if !@users.blank?
           -for user in @users
             .clear
@@ -50,5 +50,50 @@
                 %span.tags
                   = "#" << job.label
       .clear
+
+      #announces
+        %h4 
+          = @announces.count 
+          -if @announces.count > 1
+            = sentence_plural
+          -else 
+            = sentence_singular
+          %span.grey Annonces
+        - if !@announces.blank?
+          - for announce in @announces
+            .announce
+              %div.left
+                - if announce.author_type == 0
+                  - @user = User.find(announce.author_id)
+                  - if @user.url_img 
+                    %a{:href => user_path(@user)}
+                      %img{ :src => @user.url_img << "=medium", :alt => @user.login}
+                  - else
+                    %a{:href => user_path(@user)}
+                      %img{ :src => @user.avatar.url(:medium), :alt => @user.login}
+                - else
+                  - @project = Project.find(announce.author_id)
+                  %a{:href => project_path(@project)}
+                    = image_tag @project.avatar_project.url(:medium), :class => "left"
+          
+              %div.left
+                %p.send_mail
+                  %img{:src => "#", :alt => ""}
+                    = link_to "Postuler", :action => "postuler", :id => announce.author_id, :annouce_id => announce.id
+                %h3
+                  = announce.title
+                - job = Job.find(announce.job_id)
+                %p
+                  %span 
+                    = "#" << job.label
+                %p
+                  %img{:src => "/img/icons/location.png", :alt => ""}
+                  %span 
+                    = announce.location
+                %p.description
+                  = announce.description
+              .clear
+            .clear
+
       .push
 

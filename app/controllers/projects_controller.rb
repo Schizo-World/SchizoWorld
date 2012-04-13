@@ -3,7 +3,8 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
-
+    @announces = Announce.where("author_id = ? AND author_type = ?", @project.id, '1')
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
@@ -14,6 +15,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
+    @announces = Announce.where("author_id = ? AND author_type = ?", @project.id, '1')
 
     respond_to do |format|
       format.html # show.html.erb

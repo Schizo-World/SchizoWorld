@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     def results
       @projects = Project.search(params[:search])
       @users = User.search(params[:search])
+      @announces = Announce.search(params[:search])
     end
 
 end

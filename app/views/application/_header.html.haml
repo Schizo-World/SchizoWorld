@@ -12,10 +12,13 @@
     %ul#main_nav
       - if logged_in?
         %li
-          %a{:href => "/"} Home
+          %a{:href => "/"} L'Arbre
         %li|
         %li
           %a{:href => "#feed"} Feed
+        %li|
+        %li
+          %a{:href => "/announces"} Annonces
         %li|
         %li
           %a{:href => "#messages"} Messages
@@ -23,13 +26,13 @@
 
       - else
         %li#l-home
-          %a.scrollin{:href => "/"} Home
+          %a.scrollin{:href => "/"} L'Arbre
         %li|
         %li#l-project
-          %a.scrollin{:href => "#project"} The Project
+          %a.scrollin{:href => "#project"} Le Projet
         %li|
         %li#l-team
-          %a.scrollin{:href => "#team"} Our Team
+          %a.scrollin{:href => "#team"} Notre Equipe
 
     %ul#subscription
       - if logged_in?
@@ -37,14 +40,14 @@
           %a{:href => "/profile"}= current_user.login
         %li.dot
         %li
-          %a{:href => "/logout"} logout
+          %a{:href => "/logout"} se déconnecter
 
       - else
         %li
-          %a.popup{:href => "#form_subscription"} subscribe
+          %a.popup{:href => "#form_subscription"} s'inscrire
         %li.dot
         %li
-          %a.popup{:href => "#form_login"}login
+          %a.popup{:href => "#form_login"}se connecter
 
     =form_tag('/application/results', :method => 'get', :id => 'searchBar') do
       %p

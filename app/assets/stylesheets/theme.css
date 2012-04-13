@@ -704,7 +704,7 @@ MENU SOCIAL
     font-size:12px;
     list-style-type : none;
     padding-bottom : 34px;
-    border-bottom : 1px solid #C2C2C2;
+    border-bottom : 1px solid #D9D9F3;
     margin-left : 0;
 }
 
@@ -714,7 +714,7 @@ MENU SOCIAL
     height : 20px;
     background-color: #E6E5E6;
     margin : 3px 3px 0 3px;
-    border : 1px solid #C2C2C2;
+    border : 1px solid #D9D9F3;
     padding : 5px;
 }
 
@@ -755,7 +755,11 @@ form.new_project {
 	overflow:hidden;
 }
 
-.edit_user .field, .edit_project .field, .new_project .field{
+form.new_announce {
+    margin:0 0 35px 0;
+}
+
+.edit_user .field, .edit_project .field, .new_project .field, .new_announce .field{
 	margin:0 0 7px 0;
 	font-size:13px;
 }
@@ -783,12 +787,12 @@ form.new_project {
 	margin: 0 0 0 35px;
 }
 
-.edit_user label, .edit_project label, .new_project label{
+.edit_user label, .edit_project label, .new_project label, .new_announce label{
 	margin:0 15px 0 0;
 	font-weight:bold;
 }
 
-.edit_user input, .edit_project input {
+.edit_user input, .edit_project input, .new_announce input {
 	float:right;
 	border:1px solid #D9D9F3;
 	margin: 0 340px 0 0;
@@ -801,6 +805,11 @@ form.new_project {
     float: left;
     margin: 0 0 0 104px;
 	background:#fff;
+}
+.new_announce select{
+    border:1px solid #D9D9F3;
+    margin: 0 0 0 65px;
+    background:#fff;
 }
 
 #edit_project_2 {
@@ -839,7 +848,7 @@ form.new_project {
 	margin: 0 28px 0 0;
 }
 
-.edit_user input[type="submit"], .edit_project input[type="submit"], .new_project input[type="submit"]{
+.edit_user input[type="submit"], .edit_project input[type="submit"], .new_project input[type="submit"], .new_announce input[type="submit"]{
 	background-color:#ededed;
 	padding:2px 5px;
 	margin: 10px 340px 0 0;
@@ -851,13 +860,17 @@ form.new_project {
 	margin: 10px 28px 0 0;
 }
 
-.edit_project textarea, .new_project textarea {
+.edit_project textarea, .new_project textarea, .new_announce textarea {
     border: 1px solid #D9D9F3;
     height: 140px;
     margin: 3px 239px 0 0;
     width: 390px;
     font-family: 'Asap',sans-serif;
 	font-size:1em;
+}
+
+.new_announce textarea {
+    height: 79px;
 }
 
 .edit_user textarea {
@@ -915,14 +928,22 @@ form.new_project {
 /*----------------------------------------------------------------------------*/
 .subscription {
 	margin:15px 0 15px 0;
+    width:960px;
+    padding:125px 0 150px 0;
+    margin:auto;
+}
+
+.popup_subscription, .popup_subscription .login {
+    margin-top:0;
+    padding-top:0;
 }
 
 #signup {
-	margin:0 30px 75px 30px;
+	margin:65px 30px 75px 30px;
 }
 
 #signup.login {
-	margin:0 30px;
+	margin:65px 0 30px 0;
 }
 
 #signup h1 {
@@ -944,6 +965,7 @@ form.new_project {
 #signup .right {
 	/*border-left:solid 1px #000;*/
 	padding:0 0 0 60px;
+    width: 426px;
 }
 
 #instant_signup img {
@@ -978,8 +1000,22 @@ form.new_project {
 	margin:10px 0 0 0;
 }
 
+#normal_signup ul {
+    margin:0 0 15px 0;
+}
+
+#normal_signup ul li {
+    list-style-type:none;
+    color:red;
+}
+
 .login {
 	width:400px;
+}
+
+.popup_login {
+    width:450px;
+    padding:25px 0 15px 0;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -1004,7 +1040,7 @@ h1#search_result {
     width:430px;
 }
 
-.category p {
+#search_content p {
     font-size:13px;
     text-align:justify;
     margin:10px 0 0 0;
@@ -1014,9 +1050,15 @@ h1#search_result {
     margin:0 7px 10px 0;
 }
 
-.category h4 {
+#search_content h4 {
     margin:0 0 15px 0;
     border-bottom:1px solid #000;
+}
+
+#search_content h4 span {
+    font-size:16px;
+    position:relative;
+    top:0px;
 }
 
 .category .tags {
@@ -1028,6 +1070,65 @@ h1#search_result {
 
 .category .grey {
     color: #666666;
+}
+
+/*----------------------------------------------------------------------------*/
+/*------------------------------ ALL ANNOUNCES -------------------------------*/
+/*----------------------------------------------------------------------------*/
+h1#announces_result {
+    padding:0;
+    text-transform:none;
+}
+
+#announces {
+    margin:65px 0 0 0;
+}
+
+/*----------------------------------------------------------------------------*/
+/*----------------------------- ANNOUNCES SHEET ------------------------------*/
+/*----------------------------------------------------------------------------*/
+#social_content #announces {
+    margin:0;
+}
+
+#announces a img {
+    margin:0 7px 10px 0;
+}
+
+#announces span {
+    margin:0 0 5px 0;
+    color: #666666;
+    font-size:13px;
+    position:relative;
+    bottom:4px;
+}
+
+#announces p img {
+    margin:0 2px 0 25px;
+    width:13px;
+}
+
+#announces p {
+    margin:15px 0 0 0;
+    display:inline;
+    text-align:justify;
+}
+
+#announces p.description{
+    display:block;
+    width: 555px;
+}
+
+#announces .send_mail {
+    float:right;
+}
+
+#announces p.send_mail {
+    margin:6px 0 0 0;
+}
+
+.announce {
+    margin:0 0 25px 0;
 }
 
 /*----------------------------------------------------------------------------*/

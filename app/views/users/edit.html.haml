@@ -1,3 +1,6 @@
+%div{:style => "display: none;"}
+  #form_new_project
+    = render :partial => "projects/new", :locals => {:@project => Project.new} 
 #sky
   #container.socialContainer
     - if @user.url_img 
@@ -21,7 +24,7 @@
       .info
         %img.left{ :src => "/img/icons/pencil.png", :alt => ""}
         %p
-          =link_to "Create a project", new_project_path
+          = link_to "Create a project", "#form_new_project", :class => "popup"
       %br/
       %br/
 
@@ -55,7 +58,7 @@
           %li
             %a{:alt => "#projects_overed", :class => "tab_menu"} Projets terminés
           %li
-            %a{:alt => "#ad", :class => "tab_menu"} Annonces
+            %a{:alt => "#ad", :class => "tab_menu"} Mes annonces
       #content
         #form
           %h4 Informations générales
@@ -92,6 +95,44 @@
           %p projects_overed
 
         #ad.tab_content.hidden
-          %p ad
+          #announces
+            = render :partial => "announces/new", :locals => {:@announce => Announce.new, :@author_type => '1', :@author_id => @user.id} 
+            .clear
+            - if !@announces.blank?
+              %h4 Mes annonces
+              - for announce in @announces
+                .announce
+                  %div.left
+                    - if announce.author_type == 0
+                      - @user = User.find(announce.author_id)
+                      - if @user.url_img 
+                        %a{:href => user_path(@user)}
+                          %img{ :src => @user.url_img << "=medium", :alt => @user.login}
+                      - else
+                        %a{:href => user_path(@user)}
+                          %img{ :src => @user.avatar.url(:medium), :alt => @user.login}
+                    - else
+                      - @project = Project.find(announce.author_id)
+                      %a{:href => project_path(@project)}
+                        = image_tag @project.avatar_project.url(:medium), :class => "left"
+              
+                  %div.left
+                    %p.send_mail
+                      %img{:src => "#", :alt => ""}
+                        = link_to "Postuler", :action => "postuler", :id => announce.author_id, :announce_id => announce.id
+                    %h3
+                      = announce.title
+                    - job = Job.find(announce.job_id)
+                    %p
+                      %span 
+                        = "#" << job.label
+                    %p
+                      %img{:src => "/img/icons/location.png", :alt => ""}
+                      %span 
+                        = announce.location
+                    %p.description
+                      = announce.description
+                  .clear
+                .clear
 
     .clear

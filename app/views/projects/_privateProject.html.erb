@@ -53,7 +53,7 @@
                 <a alt="#doc" class="tab_menu"> Documents </a>
               </li>
               <li>
-                <a alt="#ad" class="tab_menu"> Annonces </a>
+                <a alt="#ad" class="tab_menu"> Nos annonces </a>
               </li>
             </ul>
           </div>
@@ -78,7 +78,33 @@
             </div>
 
             <div id="ad" class="tab_content hidden">
-              <p>annonces</p>
+              <%= render :partial => "announces/new", :locals => {:@announce => Announce.new, :@author_type => '1', :@author_id => @project.id} %>
+              <div class="clear"></div>
+              <%if !@announces.blank?%>
+                <div id="announces">
+                  <h4>Nos annonces</h4>
+                    <% for announce in @announces %>
+                      <div class="announce">
+                          <a href="<%= project_path(@project) %>"><%= image_tag @project.avatar_project.url(:medium), :class => "left" %></a>
+                          <p class="send_mail"><img src="#" alt=""/><a href="#">Postuler</a></p>
+                          <div>
+                            <h3><%= announce.title%></h3>
+                            <% job = Job.find(announce.job_id) %>
+                            <p>
+                                <span>#<%= job.label %></span>
+                            </p>
+                            <p>
+                                <img src="/img/icons/location.png" alt=""/>
+                                <span><%= announce.location %></span>
+                            </p>
+                            <p class="description"><%= announce.description %></p>
+                            <div class="clear"></div>
+                          </div>
+                      </div>
+                      <div class="clear"></div>
+                    <% end %>
+                </div>
+              <% end %>
             </div>
 
               <!--<h4>Liste des administrateurs</h4>

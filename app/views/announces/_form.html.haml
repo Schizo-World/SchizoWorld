@@ -7,16 +7,22 @@
           %li= msg
 
   .field
-    = f.label :title
+    = f.label "Titre"
     = f.text_field :title
   .field
-    = f.label :location
+    = f.label "Ville"
     = f.text_field :location
   .field
-    = f.label "job"
-    = f.number_field :job_id
+    = f.label "Job"
+    = collection_select(:user_job, :job_id, Job.all, :id, :label, :prompt => 'Sélectionner un job')
   .field
     = f.label :description
+    %br
     = f.text_area :description
+  .field
+    = hidden_field_tag 'author_type', @author_type
+  .field
+    = hidden_field_tag 'author_id', @author_id
   .actions
     = f.submit 'Save'
+  .clear

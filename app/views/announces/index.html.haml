@@ -1,28 +1,43 @@
-%h1 Listing announces
+#sky_search
+  #container.socialContainer
+    %h1#announces_result
+      Annonces
 
-%table
-  %tr
-    %th Title
-    %th Location
-    %th Tag
-    %th Description
-    %th Author
-    %th Author type
-    %th Statut
-    %th
-    %th
-    %th
-
-  - @announces.each do |announce|
-    %tr
-      %td= announce.title
-      %td= announce.location
-      %td= announce.job_id
-      %td= announce.description
-      %td= link_to 'Show', announce
-      %td= link_to 'Edit', edit_announce_path(announce)
-      %td= link_to 'Destroy', announce, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Announce', new_announce_path
+    #announces
+      - if !@announces.blank?
+        - for announce in @announces
+          .announce
+            %div.left
+              - if announce.author_type == 0
+                - @user = User.find(announce.author_id)
+                - if @user.url_img 
+                  %a{:href => user_path(@user)}
+                    %img{ :src => @user.url_img << "=medium", :alt => @user.login}
+                - else
+                  %a{:href => user_path(@user)}
+                    %img{ :src => @user.avatar.url(:medium), :alt => @user.login}
+              - else
+                - @project = Project.find(announce.author_id)
+                %a{:href => project_path(@project)}
+                  = image_tag @project.avatar_project.url(:medium), :class => "left"
+        
+            %div.left
+              %p.send_mail
+                %img{:src => "#", :alt => ""}
+                  = link_to "Postuler", :action => "postuler", :id => announce.author_id, :announce_id => announce.id
+              %h3
+                = announce.title
+              - job = Job.find(announce.job_id)
+              %p
+                %span 
+                  = "#" << job.label
+              %p
+                %img{:src => "/img/icons/location.png", :alt => ""}
+                %span 
+                  = announce.location
+              %p.description
+                = announce.description
+            .clear
+          .clear
+      .clear
+      .push

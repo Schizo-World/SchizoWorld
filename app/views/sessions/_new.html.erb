@@ -1,4 +1,4 @@
-<div id="container" class="subscription">
+<div id="container" class="subscription popup_login">
 	<div id="signup" class="login">
 		<h1>Login</h1>
 		<div id="instant_signup">
@@ -13,7 +13,7 @@
 			<p><%= label_tag 'login' %>
 			<%= text_field_tag 'login', @login %></p>
 
-			<p><%= label_tag 'password' %>
+			<p><%= label_tag 'Mot de passe' %>
 			<%= password_field_tag 'password', nil %></p>
 
 			<!-- Uncomment this if you want this functionality
@@ -21,7 +21,7 @@
 			<%= check_box_tag 'remember_me', '1', @remember_me %></p>
 			-->
 
-			<p><%= submit_tag 'Log in' %></p>
+			<p><%= submit_tag 'Se connecter' %></p>
 			<% end %>
 		</div>
 		<div class="clear"></div>

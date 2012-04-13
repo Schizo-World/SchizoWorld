@@ -1,3 +1,8 @@
+<div style="display: none;">
+  <div id="form_new_project">
+    <%= render :partial => "projects/new", :locals => {:@project => Project.new} %>
+  </div>
+</div>
 <div id="sky">
   <div id="container" class="socialContainer">
     <% if @user.url_img != nil%>
@@ -62,7 +67,7 @@
             <a alt="#projects_overed" class="tab_menu"> Projets terminés </a>
           </li>
           <li>
-            <a alt="#ad" class="tab_menu"> Annonces </a>
+            <a alt="#ad" class="tab_menu"> Mes annonces </a>
           </li>
         </ul>
       </div>
@@ -87,9 +92,36 @@
         </div>
 
         <div id="ad" class="tab_content hidden">
-          <%= render :partial => "announces/new", :locals => {:@announce => Announce.new} %>
-          <% for announce in @announces %>
-            <p><%= announce.title %></p>
+          <%= render :partial => "announces/new", :locals => {:@announce => Announce.new, :@author_type => '0', :@author_id => @user.id} %>
+          <div class="clear"></div>
+          <%if !@announces.blank?%>
+              <div id="announces">
+                  <h4>Mes annonces</h4>
+                    <% for announce in @announces %>
+                      <div class="announce">
+                          <% if @user.url_img != nil%>
+                            <a href="<%= :profile %>"><%= image_tag @user.url_img << "=medium", :alt => @user.login, :class => "left" %></a>
+                          <% else %>
+                            <a href="<%= :profile %>"><%= image_tag @user.avatar.url(:medium), :class => "left" %></a>
+                          <% end %>
+                          <p class="send_mail"><img src="#" alt=""/><a href="#">Postuler</a></p>
+                          <div>
+                            <h3><%= announce.title%></h3>
+                            <% job = Job.find(announce.job_id) %>
+                            <p>
+                                <span>#<%= job.label %></span>
+                            </p>
+                            <p>
+                                <img src="/img/icons/location.png" alt=""/>
+                                <span><%= announce.location %></span>
+                            </p>
+                            <p class="description"><%= announce.description %></p>
+                            <div class="clear"></div>
+                          </div>
+                      </div>
+                      <div class="clear"></div>
+                    <% end %>
+              </div>
           <% end %>
         </div>
 

@@ -1,51 +1,53 @@
-<div id="container" class="subscription">
-	<div id="signup">
+<div id="sky_search">
+	<div id="container" class="subscription">
 		<h1>Sign up as a new user</h1>
-		<div class="left" id="description">
-			<p>Vous enregistrez vous permet de : </p>
-			<ul>
-				<li>Visionner des films dans l'arbre de vidéos</li>
-				<li>Trouver des collaborateurs pour partager vos idées</li>
-				<li>Partager et télécharger des ressources gratuites</li>
-			</ul>
-		</div>
-		<div class="right">
-			<div id="instant_signup">
-				<h3>Instant Sign up</h3>
-				<a href="auth/facebook/"><img src="img/facebook.png" alt="Facebook" /></a>
-				<!--<a href="auth/twitter/"><img src="img/twitter.png" alt="Twitter" /></a>
-				<a href="auth/google/"><img src="img/google.png" alt="Google" /></a>-->
+		<div id="signup">
+			<div class="left" id="description">
+				<p>Vous enregistrez vous permet de : </p>
+				<ul>
+					<li>Visionner des films dans l'arbre de vidéos</li>
+					<li>Trouver des collaborateurs pour partager vos idées</li>
+					<li>Partager et télécharger des ressources gratuites</li>
+				</ul>
 			</div>
+			<div class="right">
+				<div id="instant_signup">
+					<h3>Instant Sign up</h3>
+					<a href="auth/facebook/"><img src="img/facebook.png" alt="Facebook" /></a>
+					<!--<a href="auth/twitter/"><img src="img/twitter.png" alt="Twitter" /></a>
+					<a href="auth/google/"><img src="img/google.png" alt="Google" /></a>-->
+				</div>
 
-			<div id="normal_signup">
-				<h3>Normal Sign up</h3>
-				<% @user.password = nil %>
-				<% @user.password_confirmation = nil %>
+				<div id="normal_signup">
+					<h3>Normal Sign up</h3>
+					<% @user.password = nil %>
+					<% @user.password_confirmation = nil %>
 
-				<% if @user.errors.any? %>
-				  <ul>
-				    <% @user.errors.full_messages.each do |msg| %>
-				      <li><%= msg %></li>
-				    <% end %>
-				  </ul>
-				<% end %>
-				<%= form_for :user, :url => users_path do |f| -%>
-				<p><%= label_tag 'login' %>
-				<%= f.text_field :login %></p>
+					<% if @user.errors.any? %>
+					  <ul>
+					    <% @user.errors.full_messages.each do |msg| %>
+					      <li><%= msg %></li>
+					    <% end %>
+					  </ul>
+					<% end %>
+					<%= form_for :user, :url => users_path do |f| -%>
+					<p><%= label_tag 'login' %>
+					<%= f.text_field :login %></p>
 
-				<p><%= label_tag 'email' %>
-				<%= f.text_field :email %></p>
+					<p><%= label_tag 'email' %>
+					<%= f.text_field :email %></p>
 
-				<p><%= label_tag 'password' %>
-				<%= f.password_field :password %></p>
+					<p><%= label_tag 'mot de passe' %>
+					<%= f.password_field :password %></p>
 
-				<p><%= label_tag 'password_confirmation', 'Confirm Password' %>
-				<%= f.password_field :password_confirmation %></p>
+					<p><%= label_tag 'password_confirmation', 'Confirmation du mot de passe' %>
+					<%= f.password_field :password_confirmation %></p>
 
-				<p><%= submit_tag 'Sign up' %></p>
-				<% end -%>
+					<p><%= submit_tag "S'inscrire" %></p>
+					<% end -%>
+				</div>
 			</div>
 		</div>
+		<div class="clear"></div>
 	</div>
-	<div class="clear"></div>
 </div>

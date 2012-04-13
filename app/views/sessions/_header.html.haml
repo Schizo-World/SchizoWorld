@@ -7,28 +7,28 @@
       %img#logo_small{:alt => "It's a Small Schizophrenic World", :src => "img/logo_small.png"}/
     %ul#main_nav
       %li#l-home
-        %a.scrollin{:href => "/"} Home
+        %a.scrollin{:href => "/"} L'Arbre
       %li|
       %li#l-project
-        %a.scrollin{:href => "#project"} The Project
+        %a.scrollin{:href => "#project"} Le Projet
       %li|
       %li#l-team
-        %a.scrollin{:href => "#team"} Our Team
+        %a.scrollin{:href => "#team"} Notre Equipe
 
     %ul#subscription
       - if !logged_in? 
         %li
-          %a.various{:href => "signup"} subscribe
+          %a.various{:href => "signup"} s'inscrire
         %li.dot  
         %li
-          %a{:href => "login"} login
+          %a{:href => "login"} se connecter
       - else
         %li
           %a{:href => "profile"}= current_user.login
         %li.notification 12
         %li.dot
         %li
-          %a{:href => "logout"} logout
+          %a{:href => "logout"} se déconnecter
 
     %form#searchBar
       %input#searchField{:type => "text", :name => "searchField"}

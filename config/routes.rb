@@ -8,6 +8,18 @@ Schizoworld::Application.routes.draw do
   resources :sessions
   resources :users
   resources :projects
+  
+  resources :videos do
+  member do
+    post :add_comment
+  end
+  new do
+     post :upload
+     get :save_video
+   end
+  end
+
+  match "videos/:id/add_comment", :to => "videos#add_comment"
 
   match 'login' => 'sessions#new', :as => :login
   match 'logout' => 'sessions#destroy', :as => :logout

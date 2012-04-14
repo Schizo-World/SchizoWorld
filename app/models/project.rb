@@ -1,6 +1,7 @@
 class Project < ActiveRecord::Base
   
   has_many :announces, :foreign_key => "author_id"
+  has_many:announce_candidates, :foreign_key => "author_id"
 
 	has_many :project_users
   has_many :users, :through => :project_users

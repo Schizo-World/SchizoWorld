@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412121647) do
+ActiveRecord::Schema.define(:version => 20120414100059) do
+
+  create_table "announce_candidates", :force => true do |t|
+    t.integer "announce_id"
+    t.integer "author_id"
+    t.boolean "accepted"
+  end
 
   create_table "announces", :force => true do |t|
     t.string   "title"
@@ -85,5 +91,14 @@ ActiveRecord::Schema.define(:version => 20120412121647) do
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+
+  create_table "videos", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "yt_video_id"
+    t.boolean  "is_complete", :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -8,6 +8,21 @@ body {
     font-family: 'Asap',sans-serif;
 }
 
+html, body {
+    height: 100%;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+
+footer#social, .push {
+    height: 4em;
+}
+
 article,
 aside,
 details,
@@ -56,6 +71,10 @@ img {
 	clear:both;
 }
 
+img.thumb_facebook {
+	width:30px;
+}
+
 /*----------------------------------------------------------------------------*/
 /*---------------------------------- MENU ------------------------------------*/
 /*----------------------------------------------------------------------------*/
@@ -64,7 +83,7 @@ header {
 	margin:0px;
 	position:fixed;
 	z-index:150;
-	background: url(img/background_menu.jpg) repeat-x center center;
+	background: url(/img/background_menu.jpg) repeat-x center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -84,7 +103,7 @@ header {
 }
 
 #logo{
-	background-image:url("img/logo.png");
+	background-image:url("/img/logo.png");
 	width:101px;
 	height:204px;
 	position:absolute;
@@ -131,14 +150,14 @@ header nav ul#subscription {
 }
 
 .dot{
-    background:url("img/dot.png") no-repeat;
+    background:url("/img/dot.png") no-repeat;
     width:9px;
     height:9px;
     display:inline-block;
 }
 
 .notification{
-    background: url("img/notification.png") no-repeat top left;
+    background: url("/img/notification.png") no-repeat top left;
     padding:5px 7px 10px 7px;
     cursor:pointer;
     display:inline-block;
@@ -153,7 +172,7 @@ header nav ul#subscription {
 }
 
 #searchBar {
-    background: url("img/menuSearchBar.png") no-repeat;
+    background: url("/img/menuSearchBar.png") no-repeat;
     width:341px;
     height:38px;
     float:right;
@@ -170,7 +189,7 @@ header nav ul#subscription {
 }
 
 #searchBar #searchIcon{
-    background: url('img/searchIcon.png') no-repeat;
+    background: url('/img/searchIcon.png') no-repeat;
     border:none;
     cursor:pointer;
     color:transparent;
@@ -184,28 +203,69 @@ header nav ul#subscription {
 /*---------------------------------- TREE ------------------------------------*/
 /*----------------------------------------------------------------------------*/
 #tree { 
-	background: url(img/background_sky.jpg) repeat-x;
+	background: url(/img/background_sky.jpg) repeat-x;
 	min-width:900px;
 	height:755px;
 }
 
-#tree_wrapper {
-	background: url(img/bench.png) no-repeat;
-	float:right;
-	margin:577px 0px 0px 0px;
-	height:179px;
-	width:405px;	
+#tree_man {
+  background: url("/img/bench.png") no-repeat scroll 0 0 transparent;
+  float: left;
+  height: 303px;
+  margin: 451px 0 0 -31px;
+  width: 600px;	
 }
 
-#video {
-	position:absolute;
-	top:150px;
-        margin-left:50%;
-        left:-300px;
+#tree_videos{
+  height: 443px;
+  position: absolute;
+  top: 87px;
+  width: 540px;
 }
+
+#tree_image{
+  height: 43px;
+  position:relative;
+  top:1.5px;
+  right:1.5px;
+  margin: auto;
+  width: 50px;
+  overflow:hidden;
+}
+
+#tree_node{
+  height:45px;
+  width:70px;
+  background: url('/img/tree_node.png');
+}
+
+#tree_info {
+  float: right;
+  margin: 125px 0 0 0;
+  width: 330px;
+}
+
+#tree_description {
+  background-color:#EE5757;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+#tree_search {
+  background-color:#FFFFFF;
+  height: 75px;
+  margin-bottom: 20px;
+}
+
+#tree_results {
+  background-color:#026837;
+  height:330px;
+  overflow:auto;
+}
+
 
 #grass {
-	background: url(img/grass.png) repeat-x;
+	background: url(/img/grass.png) repeat-x;
 	width:100%;
 	height:78px;
 	position:absolute;
@@ -216,7 +276,7 @@ header nav ul#subscription {
 /*--------------------------- PROJECT DESCRIPTION ----------------------------*/
 /*----------------------------------------------------------------------------*/
 #project { 
-	background: url(img/background_ground.jpg) no-repeat center center;
+	background: url(/img/background_ground.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -227,7 +287,7 @@ header nav ul#subscription {
 }
 
 #grass_root{
-	background: url(img/grass_root.png) repeat-x;
+	background: url(/img/grass_root.png) repeat-x;
 	width:100%;
 	height:78px;
 	position:absolute;
@@ -327,7 +387,7 @@ header nav ul#subscription {
 /*---------------------------------- TEAM ------------------------------------*/
 /*----------------------------------------------------------------------------*/
 #team { 
-	background: url("img/background_bunker.jpg") no-repeat center center;
+	background: url("/img/background_bunker.jpg") no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -408,7 +468,7 @@ header nav ul#subscription {
 }
 
 .folder {
-	background: url("img/folder.png") no-repeat;
+	background: url("/img/folder.png") no-repeat;
 	height:531px;
 	margin: 0 0 0 357px;
     position: relative;
@@ -458,7 +518,7 @@ header nav ul#subscription {
 /*--------------------------------- PROFILE ----------------------------------*/
 /*----------------------------------------------------------------------------*/
 #sky { 
-	background: url(img/background_sky_sheet.jpg) repeat-x;
+	background: url(/img/background_sky_sheet.jpg) repeat-x;
 	min-width:900px;
 }
 
@@ -469,27 +529,70 @@ header nav ul#subscription {
 
 .info_sup {
 	clear:left;
+	font-size:13px;
+	width: 180px;
+}
+
+.info {
+	clear:both;
+	margin:10px 0;
+}
+
+.info p {
+    position: relative;
+    top: 4px;
+    left: 7px;
 }
 
 #social_content {
 	position:relative;
-	bottom:116px;
+	bottom:96px;
 }
 
 #content {
 	background-color:#fff;
-	width:715px;
+	width:733px;
 	padding:44px 20px 0 20px;
+}
+
+#content h3 {
+	font-size:20px;
+}
+
+#content h4 {
+	font-size:20px;
+	border-bottom:1px solid #000;
+	margin:0 0 15px 0;
 }
 
 #content p{
 	text-align: justify;
+	font-size:13px;
+}
+
+#content .project_list {
+	margin:0 0 15px 0;
+	position:relative;
+}
+
+#content .project_list img{
+	margin:0 15px 0 0;
+}
+
+#content .project_list h3{
+	margin:0 0 15px 0;
+}
+
+#content .project_list .send_mail{
+	position:absolute;
+	bottom:15px;
+	right:0;
 }
 
 .socialContainer
 {
     width:960px;
-    padding:125px 0 0 0;
+    padding:125px 0 75px 0;
     margin:auto;
 }
 
@@ -501,14 +604,24 @@ header nav ul#subscription {
 }
 
 .socialContainer h1 {
-    padding: 0 0 0 227px;
+    padding: 0 0 0 205px;
     position: relative;
     bottom: 5px;
     text-transform:capitalize;
 }
 
-#socialInfo
-{
+.socialContainer #jobs {
+    padding: 0 0 0 204px;
+    position: relative;
+    bottom: 5px;
+    color:#666;
+}
+
+.socialContainer #jobs span {
+    margin: 0 5px 0 0;
+}
+
+#socialInfo {
     float:left;
     width:200px;
     padding:5px;
@@ -524,14 +637,12 @@ header nav ul#subscription {
     font-size: 12px;
 }
 
-#socialInfo img
-{
+#socialInfo img {
     width:98%;
     border:2px solid #000000;
 }
 
-#socialTitle
-{
+#socialTitle {
     margin-bottom:30px;
 }
 
@@ -540,14 +651,13 @@ header nav ul#subscription {
     margin-top:5px;
 }
 
-#socialTitle h1
-{
+#socialTitle h1 {
     font-weight: bold;
     font-size:28px;
     margin:0;
 }
 
-#socialTitle #titleBlock{
+#socialTitle #titleBlock {
     float:left;
     height: 100%;
 }
@@ -635,7 +745,7 @@ MENU SOCIAL
     font-size:12px;
     list-style-type : none;
     padding-bottom : 34px;
-    border-bottom : 1px solid #C2C2C2;
+    border-bottom : 1px solid #D9D9F3;
     margin-left : 0;
 }
 
@@ -645,7 +755,7 @@ MENU SOCIAL
     height : 20px;
     background-color: #E6E5E6;
     margin : 3px 3px 0 3px;
-    border : 1px solid #C2C2C2;
+    border : 1px solid #D9D9F3;
     padding : 5px;
 }
 
@@ -665,6 +775,7 @@ MENU SOCIAL
     color : #000000;
     text-decoration : none;
     padding : 5px;
+    cursor:pointer;
 }
 
 #tabs li:hover
@@ -674,37 +785,206 @@ MENU SOCIAL
 }
 
 /*----------------------------------------------------------------------------*/
-/*------------------------------ EDIT PROFILE --------------------------------*/
+/*------------------------ EDIT PROFILE / PROJECT ----------------------------*/
 /*----------------------------------------------------------------------------*/
-form.edit_user {
+form.edit_user, form.edit_project {
 	margin:10px 0 0 0;
 }
 
-.edit_user .field {
+form.new_project {
+	width:420px;
+	overflow:hidden;
+}
+
+form.new_announce {
+    margin:0 0 35px 0;
+}
+
+.edit_user .field, .edit_project .field, .new_project .field, .new_announce .field{
 	margin:0 0 7px 0;
+	font-size:13px;
 }
 
-.edit_user label{
+.edit_user .job_box {
+	width:143px;
+}
+
+.job_box .delete {
+	width:18px;
+    position: relative;
+    top: 3px;
+}
+
+.edit_user .job_box p {
+	float:left;
+	clear:both;
+}
+
+.edit_user .field.no_job label {
+	float:left;
+}
+
+.edit_user .field.no_job select {
+	margin: 0 0 0 35px;
+}
+
+.edit_user label, .edit_project label, .new_project label, .new_announce label{
 	margin:0 15px 0 0;
+	font-weight:bold;
 }
 
-.edit_user input{
+.edit_user input, .edit_project input, .new_announce input {
 	float:right;
-	border:1px solid #000;
+	border:1px solid #D9D9F3;
 	margin: 0 340px 0 0;
+	font-size:1em;
+	width:286px;
 }
 
-.edit_user input[type="submit"]{
+.edit_user select {
+	border:1px solid #D9D9F3;
+    float: left;
+    margin: 0 0 0 104px;
+	background:#fff;
+}
+.new_announce select{
+    border:1px solid #D9D9F3;
+    margin: 0 0 0 65px;
+    background:#fff;
+}
+
+#edit_project_2 {
+    margin:0 0 0 7px;
+}
+
+#form_job .edit_user select, #form_job .edit_project select{
+    border:1px solid #D9D9F3;
+    margin:2px 10px 0 0;
+    float:left;
+    background:#fff;
+}
+
+#form_job .edit_user input[type="submit"], #form_job .edit_project input[type="submit"] {
+    float:left;
+    margin:0;
+}
+
+#form_job img.left {
+    margin:0 10px 10px 0;
+}
+
+#form_job p {
+    font-size:15px;
+}
+
+#form_job .job_box span {
+    font-size:13px;
+    position:relative;
+    bottom:5px;
+}
+
+.new_project input {
+	float:right;
+	border:1px solid #D9D9F3;
+	margin: 0 28px 0 0;
+}
+
+.edit_user input[type="submit"], .edit_project input[type="submit"], .new_project input[type="submit"], .new_announce input[type="submit"]{
 	background-color:#ededed;
 	padding:2px 5px;
 	margin: 10px 340px 0 0;
 	border:none;
+	width:auto;
 }
+
+.new_project input[type="submit"] {
+	margin: 10px 28px 0 0;
+}
+
+.edit_project textarea, .new_project textarea, .new_announce textarea {
+    border: 1px solid #D9D9F3;
+    height: 140px;
+    margin: 3px 239px 0 0;
+    width: 390px;
+    font-family: 'Asap',sans-serif;
+	font-size:1em;
+}
+
+.new_announce textarea {
+    height: 79px;
+}
+
+.edit_user textarea {
+	border: 1px solid #D9D9F3;
+	height: 67px;
+   	margin: 0 340px 0 0;
+    width: 286px;
+    float:right;
+    font-family: 'Asap',sans-serif;
+	font-size:1em;
+}
+
+.members {
+	width:366px;
+}
+
+.members h5{
+	font-size:14px;
+	margin:0 0 10px 0;
+}
+
+.members img{
+	margin:0 10px 10px 0;
+}
+
+#content .members p{
+	margin:13px 0 0 0;
+	font-size:15px;
+}
+
+/*----------------------------------------------------------------------------*/
+/*------------------------------ PROJECT SHEET -------------------------------*/
+/*----------------------------------------------------------------------------*/
+.project_members p {
+	margin:5px 0 0 5px;
+}
+
+.write_msg .edit_project {
+	margin:0;
+}
+
+.write_msg img {
+	margin:0 10px 0 0;
+}
+
+.write_msg .edit_project textarea {
+	width: 635px;
+	height:45px;
+	margin:0;
+	padding:2px 3px;
+}
+
 /*----------------------------------------------------------------------------*/
 /*--------------------------------- SIGNUP -----------------------------------*/
 /*----------------------------------------------------------------------------*/
+.subscription {
+	margin:15px 0 15px 0;
+    width:960px;
+    padding:125px 0 150px 0;
+    margin:auto;
+}
+
+.popup_subscription, .popup_subscription .login {
+    margin-top:0;
+    padding-top:0;
+}
+
 #signup {
-	margin:0 0 75px 30px;
+	margin:65px 30px 75px 30px;
+}
+
+#signup.login {
+	margin:65px 0 30px 0;
 }
 
 #signup h1 {
@@ -712,7 +992,7 @@ form.edit_user {
 }
 
 #signup .left {
-	margin:30px 0 0 0;
+	margin:5px 0 0 0;
 }
 
 #signup .left ul {
@@ -725,7 +1005,8 @@ form.edit_user {
 
 #signup .right {
 	/*border-left:solid 1px #000;*/
-	padding:0 40px 0 60px;
+	padding:0 0 0 60px;
+    width: 426px;
 }
 
 #instant_signup img {
@@ -751,7 +1032,7 @@ form.edit_user {
 
 #instant_signup input, #normal_signup input {
 	float:right;
-	border:1px solid #000;
+	border:1px solid #D9D9F3;
 }
 
 #instant_signup input[type="submit"], #normal_signup input[type="submit"] {
@@ -760,16 +1041,142 @@ form.edit_user {
 	margin:10px 0 0 0;
 }
 
+#normal_signup ul {
+    margin:0 0 15px 0;
+}
+
+#normal_signup ul li {
+    list-style-type:none;
+    color:red;
+}
+
 .login {
 	width:400px;
 }
 
+.popup_login {
+    width:450px;
+    padding:25px 0 15px 0;
+}
+
+/*----------------------------------------------------------------------------*/
+/*--------------------------------- SEARCH -----------------------------------*/
+/*----------------------------------------------------------------------------*/
+#sky_search { 
+    background: url(/img/background_sky_search.jpg) repeat-x;
+    min-width:900px;
+}
+
+h1#search_result {
+    padding:0;
+    text-transform:none;
+}
+
+#search_content {
+    margin:65px 0 0 0;
+}
+
+#search_content .category {
+    margin:0 0 35px 0;
+    width:430px;
+}
+
+#search_content p {
+    font-size:13px;
+    text-align:justify;
+    margin:10px 0 0 0;
+}
+
+.category img {
+    margin:0 7px 10px 0;
+}
+
+#search_content h4 {
+    margin:0 0 15px 0;
+    border-bottom:1px solid #000;
+}
+
+#search_content h4 span {
+    font-size:16px;
+    position:relative;
+    top:0px;
+}
+
+.category .tags {
+    font-size:12px;
+    color: #666666;
+    position:relative;
+    bottom:5px;
+}
+
+.category .grey {
+    color: #666666;
+}
+
+/*----------------------------------------------------------------------------*/
+/*------------------------------ ALL ANNOUNCES -------------------------------*/
+/*----------------------------------------------------------------------------*/
+h1#announces_result {
+    padding:0;
+    text-transform:none;
+}
+
+#announces {
+    margin:65px 0 0 0;
+}
+
+/*----------------------------------------------------------------------------*/
+/*----------------------------- ANNOUNCES SHEET ------------------------------*/
+/*----------------------------------------------------------------------------*/
+#social_content #announces {
+    margin:0;
+}
+
+#announces a img {
+    margin:0 7px 10px 0;
+}
+
+#announces span {
+    margin:0 0 5px 0;
+    color: #666666;
+    font-size:13px;
+    position:relative;
+    bottom:4px;
+}
+
+#announces p img {
+    margin:0 2px 0 25px;
+    width:13px;
+}
+
+#announces p {
+    margin:15px 0 0 0;
+    display:inline;
+    text-align:justify;
+}
+
+#announces p.description{
+    display:block;
+    width: 555px;
+}
+
+#announces .send_mail {
+    float:right;
+}
+
+#announces p.send_mail {
+    margin:6px 0 0 0;
+}
+
+.announce {
+    margin:0 0 25px 0;
+}
 
 /*----------------------------------------------------------------------------*/
 /*--------------------------------- FOOTER -----------------------------------*/
 /*----------------------------------------------------------------------------*/
-footer { 
-	background: url(img/background_water.jpg) no-repeat center center;
+footer#water { 
+	background: url(/img/background_water.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -777,10 +1184,11 @@ footer {
 	min-width:900px;
 	height:110px;
 	padding:174px 0 0 0;
+	font-size:14px;
 }
 
 footer#social { 
-	background: url(img/background_ground.jpg) no-repeat center center;
+	background: url(/img/background_ground.jpg) no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -802,7 +1210,7 @@ footer p {
 }
 
 #grass_footer {
-	background: url(img/grass.png) repeat-x;
+	background: url(/img/grass.png) repeat-x;
 	width:100%;
 	height:78px;
 	position:absolute;
@@ -810,7 +1218,7 @@ footer p {
 }
 
 #grass_root_footer{
-	background: url(img/grass_root.png) repeat-x;
+	background: url(/img/grass_root.png) repeat-x;
 	width:100%;
 	height:78px;
 	position:absolute;

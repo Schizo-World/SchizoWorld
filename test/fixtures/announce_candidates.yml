@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  announce_id: 1
+  author_id: 1
+  accepted: false
+
+two:
+  announce_id: 1
+  author_id: 1
+  accepted: false

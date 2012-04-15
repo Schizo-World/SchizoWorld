@@ -1,0 +1,11 @@
+common: &common
+  dev_key: AI39si5I1OLuIGrmrSvV9SHzDhDgRfwlBDgMxFHumz0Zs5rpE-8EHZBXq2JgJl2ensuoUPsjFVXQYXAOQdz8ZJVnB20bOjVGzA
+  username:  05amethyste
+  password:  1oiniyKp
+  
+test:
+  <<: *common
+development:
+  <<: *common
+production:
+  <<: *common

@@ -217,7 +217,8 @@ header nav ul#subscription {
 }
 
 #tree_videos{
-  height: 443px;
+  height: 445px;
+  background: url('/img/background_tree.png') no-repeat;
   position: absolute;
   top: 87px;
   width: 540px;
@@ -227,7 +228,7 @@ header nav ul#subscription {
   height: 43px;
   position:relative;
   top:1.5px;
-  right:1.5px;
+  right:-1.5px;
   margin: auto;
   width: 50px;
   overflow:hidden;

@@ -62,6 +62,30 @@ class ProjectsController < ApplicationController
     redirect_to @project
   end
 
+  def addcandidateuser
+    @project = Project.find(params[:id])
+    user_to_add = User.find(params[:iduser])
+    if not @project.users.include?(user_to_add)
+      ProjectUser.create(:project => @project, :user => user_to_add, :admin => false)
+    end
+    candidate = AnnounceCandidate.find_by_announce_id_and_author_id(params[:idannounce], params[:iduser])
+    candidate.update_attribute(:accepted, true)
+    candidate.save
+    redirect_to @project
+  end
+
+  def addcandidateproject
+    @project = Project.find(params[:id])
+    user_to_add = User.find(params[:iduser])
+    if not @project.users.include?(user_to_add)
+      ProjectUser.create(:project => @project, :user => user_to_add, :admin => false)
+    end
+    candidate = AnnounceCandidate.find_by_announce_id_and_author_id(params[:idannounce], params[:id])
+    candidate.update_attribute(:accepted, true)
+    candidate.save
+    redirect_to @project
+  end
+
   # POST /projects
   # POST /projects.json
   def create

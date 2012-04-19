@@ -950,6 +950,10 @@ form.new_announce {
 	margin:5px 0 0 5px;
 }
 
+.project_members img {
+    margin:0 0 7px 0;
+}
+
 .write_msg .edit_project {
 	margin:0;
 }
@@ -971,7 +975,7 @@ form.new_announce {
 .subscription {
 	margin:15px 0 15px 0;
     width:960px;
-    padding:125px 0 150px 0;
+    padding:125px 0 50px 0;
     margin:auto;
 }
 
@@ -980,16 +984,16 @@ form.new_announce {
     padding-top:0;
 }
 
-#signup {
-	margin:65px 30px 75px 30px;
+.popup_login .login h1 {
+    margin:65px 0 30px 0;
 }
 
-#signup.login {
-	margin:65px 0 30px 0;
+#signup {
+	margin:0 30px 30px 30px;
 }
 
 #signup h1 {
-	margin:0 0 30px 0;
+	margin: 15px 0 30px;
 }
 
 #signup .left {
@@ -1005,7 +1009,6 @@ form.new_announce {
 }
 
 #signup .right {
-	/*border-left:solid 1px #000;*/
 	padding:0 0 0 60px;
     width: 426px;
 }
@@ -1171,6 +1174,42 @@ h1#announces_result {
 
 .announce {
     margin:0 0 25px 0;
+}
+
+/*----------------------------------------------------------------------------*/
+/*---------------------------- MANAGE CANDIDATES -----------------------------*/
+/*----------------------------------------------------------------------------*/
+.manage_candidates {
+    width:300px;
+    margin:5px;
+}
+
+.manage_candidates h4 {
+    margin:0 0 25px 0;
+}
+
+.manage_candidates img.left {
+    margin:0 8px 7px 0; 
+}
+
+.manage_candidates p a{
+    text-decoration:none;
+    color:black;
+    position:relative;
+    bottom:5px;
+}
+
+.manage_candidates #jobs span {
+    color:#666666;
+    font-size:13px;
+    position:relative;
+    bottom:11px;
+}
+
+.manage_candidates .send_mail {
+    float:right;
+    position: relative;
+    top: 2px;
 }
 
 /*----------------------------------------------------------------------------*/

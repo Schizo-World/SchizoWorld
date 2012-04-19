@@ -1,0 +1,6 @@
+%h4 Les candidats
+
+- if !@candidates.blank?
+  - for candidate in @candidates
+    = candidate.announce_id
+

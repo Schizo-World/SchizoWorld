@@ -4,15 +4,24 @@
     <h1><a href="<%= project_path(@project) %>"><%= @project.name %></a></h1>
 
     <div class="left info_sup">
-      <div class="info">
-        <img src="/img/icons/pencil.png" alt="" class="left"/>
-        <p><%=link_to 'Editer la fiche projet', edit_project_path(@project)%></p>
-      </div>
-      <div class="info">
-        <img src="/img/icons/file.png" alt="" class="left"/>
-        <p><%=link_to 'Voir la fiche publique', :controller => "projects", :action => "show", :public => true%></p>
-      </div>
+      <% admin = false %>
+      <% members = @project.users.where("admin = ?", true) %>
+      <% for member in members %>
+        <% if member.id == current_user.id %>
+          <% admin = true %>
+        <% end %>
+      <% end %>
+      <% if admin == true %>
+        <div class="info">
+          <img src="/img/icons/pencil.png" alt="" class="left"/>
+          <p><%=link_to 'Editer la fiche projet', edit_project_path(@project)%></p>
+        </div>
+        <div class="info">
+          <img src="/img/icons/file.png" alt="" class="left"/>
+          <p><%=link_to 'Voir la fiche publique', :controller => "projects", :action => "show", :public => true%></p>
+        </div>
       <br/><br/>
+      <% end %>
 
       <% if @project.city %>
         <div class="info">
@@ -36,15 +45,14 @@
             <% else %>
               <a href="<%= user_path(user) %>"><%= image_tag user.avatar.url(:thumb), :class => "left" %></a>
             <% end %>
-            <p class="left"><%= user.login %></p>
+            <p class="left"><a href="<%= user_path(user) %>"><%= user.login %></a></p>
             <div class="clear"></div>
         <% end %> 
-      </div>     
-
+      </div> 
     </div>
 
     <div class="right" id="social_content">
-      <div id="socialMenu">
+          <div id="socialMenu">
             <ul id="tabs">
               <li class="active">
                 <a alt="#communicate" class="tab_menu"> Communiquer </a>
@@ -78,31 +86,76 @@
             </div>
 
             <div id="ad" class="tab_content hidden">
-              <%= render :partial => "announces/new", :locals => {:@announce => Announce.new, :@author_type => '1', :@author_id => @project.id} %>
+              <% admin = false %>
+              <% members = @project.users.where("admin = ?", true) %>
+              <% for member in members %>
+                <% if member.id == current_user.id %>
+                  <% admin = true %>
+                <% end %>
+              <% end %>
+              <% if admin == true %>
+                <%= render :partial => "announces/new", :locals => {:@announce => Announce.new, :@author_type => '1', :@author_id => @project.id} %>
+              <% end %>
               <div class="clear"></div>
               <%if !@announces.blank?%>
-                <div id="announces">
-                  <h4>Nos annonces</h4>
-                    <% for announce in @announces %>
-                      <div class="announce">
-                          <a href="<%= project_path(@project) %>"><%= image_tag @project.avatar_project.url(:medium), :class => "left" %></a>
-                          <p class="send_mail"><img src="#" alt=""/><a href="#">Postuler</a></p>
-                          <div>
-                            <h3><%= announce.title%></h3>
-                            <% job = Job.find(announce.job_id) %>
-                            <p>
-                                <span>#<%= job.label %></span>
-                            </p>
-                            <p>
-                                <img src="/img/icons/location.png" alt=""/>
-                                <span><%= announce.location %></span>
-                            </p>
-                            <p class="description"><%= announce.description %></p>
-                            <div class="clear"></div>
+                  <div id="announces">
+                      <h4>Mes annonces</h4>
+                        <% for announce in @announces %>
+                          <% candidates = AnnounceCandidate.where("announce_id = ?", announce.id) %>
+                          <% singular_sentence = "candidat a postulé" %>
+                          <% plural_sentence = "candidats ont postulé" %>
+                          <% negative_sentence = "Aucun candidat n'a postulé" %>
+                          <% if candidates.count == 0 %>
+                            <% sentence = negative_sentence %>
+                          <% elsif candidates.count == 1 %>
+                            <% sentence = "#{candidates.count} " << singular_sentence %>
+                          <% else %>
+                            <% sentence = "#{candidates.count} " << plural_sentence %>
+                          <% end %>
+                          <% available = false %>
+                          <% for candidate in candidates %>
+                            <% if candidate.accepted %>
+                              <% available = true %>
+                            <% end %>
+                          <% end %>
+                          <% idcss = "#{announce.id}" %>
+
+                          <div class="announce">
+                              <a href="<%= project_path(@project) %>">
+                                <%= image_tag @project.avatar_project.url(:medium), :class => "left"%>
+                              </a>
+                              <p class="send_mail"><img src="#" alt=""/>
+                                <% if candidates.count > 0 && available == false%>
+                                  <%= link_to sentence, "##{announce.id}", :class => "popup" %>
+                                <% elsif available == true %>
+                                  <span class="left">Pourvu</span>
+                                <% else %>
+                                  <%= sentence %>
+                                <% end %>
+                              </p>
+                              <div>
+                                <h3><%= announce.title%></h3>
+                                <% job = Job.find(announce.job_id) %>
+                                <p>
+                                    <span>#<%= job.label %></span>
+                                </p>
+                                <p>
+                                    <img src="/img/icons/location.png" alt=""/>
+                                    <span><%= announce.location %></span>
+                                </p>
+                                <p class="description"><%= announce.description %></p>
+                                <div class="clear"></div>
+                              </div>
                           </div>
-                      </div>
-                      <div class="clear"></div>
-                    <% end %>
+                          <% if candidates.count > 0 %>
+                            <div style="display: none;">
+                              <div id="<%= idcss %>" class="manage_candidates">
+                                <%= render :partial => "announces/candidates", :locals => {:@announce_id => announce.id}%>
+                              </div>
+                            </div>
+                          <% end %>
+                          <div class="clear"></div>
+                        <% end %>
                 </div>
               <% end %>
             </div>

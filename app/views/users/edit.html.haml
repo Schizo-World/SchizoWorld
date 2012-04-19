@@ -95,43 +95,64 @@
           %p projects_overed
 
         #ad.tab_content.hidden
-          #announces
-            = render :partial => "announces/new", :locals => {:@announce => Announce.new, :@author_type => '1', :@author_id => @user.id} 
-            .clear
-            - if !@announces.blank?
+          - if current_user.id == @user.id
+            = render :partial => "announces/new", :locals => {:@announce => Announce.new, :@author_type => '0', :@author_id => @user.id}
+          .clear
+          - if !@announces.blank?
+            #announces
               %h4 Mes annonces
               - for announce in @announces
-                .announce
-                  %div.left
-                    - if announce.author_type == 0
-                      - @user = User.find(announce.author_id)
-                      - if @user.url_img 
-                        %a{:href => user_path(@user)}
-                          %img{ :src => @user.url_img << "=medium", :alt => @user.login}
-                      - else
-                        %a{:href => user_path(@user)}
-                          %img{ :src => @user.avatar.url(:medium), :alt => @user.login}
-                    - else
-                      - @project = Project.find(announce.author_id)
-                      %a{:href => project_path(@project)}
-                        = image_tag @project.avatar_project.url(:medium), :class => "left"
-              
-                  %div.left
-                    %p.send_mail
-                      %img{:src => "#", :alt => ""}
-                        = link_to "Postuler", :action => "postuler", :id => announce.author_id, :announce_id => announce.id
-                    %h3
-                      = announce.title
-                    - job = Job.find(announce.job_id)
-                    %p
-                      %span 
-                        = "#" << job.label
-                    %p
-                      %img{:src => "/img/icons/location.png", :alt => ""}
-                      %span 
-                        = announce.location
-                    %p.description
-                      = announce.description
+                - candidates = AnnounceCandidate.where("announce_id = ?", announce.id)
+                - singular_sentence = "candidat a postulé"
+                - plural_sentence = "candidats ont postulé"
+                - negative_sentence = "Aucun candidat n'a postulé"
+                - if candidates.count == 0
+                  - sentence = negative_sentence
+                - elsif candidates.count == 1
+                  - sentence = "#{candidates.count} " << singular_sentence
+                - else
+                  - sentence = "#{candidates.count} " << plural_sentence
+                - available = false
+                - for candidate in candidates
+                  - if candidate.accepted
+                    - available = true
+                - idcss = "#{announce.id}"
+
+              .announce
+                - if @user.url_img != nil
+                  %a{:href => user_path(@user)}
+                    = image_tag @user.url_img << "=normal", :alt => @user.login, :class => "left"
+                - else
+                  %a{:href => user_path(@user)}
+                    = image_tag @user.avatar.url(:medium), :class => "left"
+                .send_mail
+                  %img{:src => "#", :alt => ""}
+                - if candidates.count > 0 && available == false
+                  = link_to sentence, "##{announce.id}", :class => "popup"
+                - elsif available == true
+                  %span.left
+                    Pourvu
+                - else
+                  = sentence 
+                %div
+                  %h3
+                    = announce.title
+                  - job = Job.find(announce.job_id)
+                  %p
+                    %span
+                      = "#" << job.label
+                  %p
+                    %img{:src => "/img/icons/location.png", :alt => ""}
+                    %span
+                      = announce.location
+                  %p.description
+                    = announce.description
+                  .clear
+
+                  %div{:style => "display: none;"}
+                    %div{:id => idcss, :class => "manage_candidates"}
+                      = render :partial => "announces/candidates", :locals => {:@announce_id => announce.id}
+
                   .clear
                 .clear
 

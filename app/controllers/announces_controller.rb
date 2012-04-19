@@ -16,8 +16,8 @@ class AnnouncesController < ApplicationController
     @announce.job_id = params[:user_job][:job_id]
     @announce.statut = 0
 
-    if params[:author_type] == 0
-      redirection = :profile
+    if @announce.author_type == 0
+      redirection = user_path(params[:author_id])
     else
       redirection = project_path(params[:author_id])
     end
@@ -37,8 +37,25 @@ class AnnouncesController < ApplicationController
     @announce = Announce.find(params[:id])
   end
 
-  def postuler
-    redirect_to :profile
+  def postuleruser
+    @candidate = AnnounceCandidate.new()
+    @candidate.author_id = params[:id]
+    @candidate.announce_id = params[:announce_id]
+    @candidate.accepted = false
+    @candidate.save
+    redirect_to "/announces"
+  end
+
+  def postulerproject
+    @candidate = AnnounceCandidate.new()
+    @candidate.author_id = params[:project][:id]
+    @candidate.announce_id = params[:announce_id]
+    @candidate.accepted = false
+    @candidate.save
+    redirect_to "/announces"
+  end
+
+  def candidate
   end
   
 end

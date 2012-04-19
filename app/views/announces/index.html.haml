@@ -6,38 +6,73 @@
     #announces
       - if !@announces.blank?
         - for announce in @announces
-          .announce
-            %div.left
-              - if announce.author_type == 0
-                - @user = User.find(announce.author_id)
-                - if @user.url_img 
-                  %a{:href => user_path(@user)}
-                    %img{ :src => @user.url_img << "=medium", :alt => @user.login}
+          - candidates = AnnounceCandidate.where("announce_id = ?", announce.id)
+          - available = false
+          - if candidates.count > 0
+            - for candidate in candidates
+              - if candidate.accepted
+                - available = true
+          - if available == false || candidates.count == 0
+            .announce
+              %div.left
+                - if announce.author_type == 0
+                  - @user = User.find(announce.author_id)
+                  - if @user.url_img 
+                    %a{:href => user_path(@user)}
+                      %img{ :src => @user.url_img << "=normal", :alt => @user.login}
+                  - else
+                    %a{:href => user_path(@user)}
+                      %img{ :src => @user.avatar.url(:medium), :alt => @user.login}
                 - else
-                  %a{:href => user_path(@user)}
-                    %img{ :src => @user.avatar.url(:medium), :alt => @user.login}
-              - else
-                - @project = Project.find(announce.author_id)
-                %a{:href => project_path(@project)}
-                  = image_tag @project.avatar_project.url(:medium), :class => "left"
-        
-            %div.left
-              %p.send_mail
-                %img{:src => "#", :alt => ""}
-                  = link_to "Postuler", :action => "postuler", :id => announce.author_id, :announce_id => announce.id
-              %h3
-                = announce.title
-              - job = Job.find(announce.job_id)
-              %p
-                %span 
-                  = "#" << job.label
-              %p
-                %img{:src => "/img/icons/location.png", :alt => ""}
-                %span 
-                  = announce.location
-              %p.description
-                = announce.description
+                  - @project = Project.find(announce.author_id)
+                  %a{:href => project_path(@project)}
+                    = image_tag @project.avatar_project.url(:medium), :class => "left"
+          
+              %div.left
+                - @user = User.find(announce.author_id)
+                - candidates = AnnounceCandidate.where("announce_id = ?", announce.id)
+                - postulated = false
+                - for candidate in candidates 
+                  - if candidate.author_id == current_user.id
+                    - postulated = true
+                - if postulated == false
+                  - if announce.author_type == 1
+                    %p.send_mail
+                      %img{:src => "#", :alt => ""}
+                        = link_to "Postuler USER", :action => "postuleruser", :id => current_user.id, :announce_id => announce.id
+                  - else
+                    - if current_user.projects.count > 0
+                      %p.send_mail
+                        %img{:src => "#", :alt => ""}
+                          = link_to "Postuler PROJECT", :action => "postuler", :id => current_user.id, :announce_id => announce.id
+                          %br
+                          = form_tag(:controller => "announces", :action => "postulerproject", :announce_id => announce.id) do
+                            .field
+                              = collection_select(:project, :id, current_user.projects, :id, :name, {:prompt => 'Sélectionner un projet'})
+                            .actions
+                              = submit_tag("OK")
+
+                - else
+                  %p.send_mail
+                    %img{:src => "#", :alt => ""}
+                %h3
+                  = announce.title 
+                  %span 
+                    - if announce.author_type == 0
+                      = " by " << @user.login
+                    - else 
+                      = " by " << @project.name
+                - job = Job.find(announce.job_id)
+                %p
+                  %span 
+                    = "#" << job.label
+                %p
+                  %img{:src => "/img/icons/location.png", :alt => ""}
+                  %span 
+                    = announce.location
+                %p.description
+                  = announce.description
+              .clear
             .clear
-          .clear
       .clear
       .push

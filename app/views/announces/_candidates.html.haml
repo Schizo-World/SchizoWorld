@@ -1,0 +1,38 @@
+%h4 Les candidats
+
+- @announce = Announce.find(@announce_id)
+- if @announce.author_type == 1
+  - @author = Project.find(@announce.author_id)
+- else 
+  - @author = User.find(@announce.author_id)
+
+- @candidates = AnnounceCandidate.where("announce_id = ?", @announce.id)
+- for candidate in @candidates
+  - if @announce.author_type == 1
+    - user = User.find(candidate.author_id)
+    - if user.url_img 
+      %a{:href => user_path(user)}
+        %img.left{ :src => user.url_img << "=small", :alt => user.login}
+    - else
+      %a{:href => user_path(user)}
+        %img.left{ :src => user.avatar.url(:small), :alt => user.login}
+    %p.send_mail
+      = link_to "Ajouter", {:controller => "projects", :action => "addcandidateuser", :id => @author.id, :iduser => user.id, :idannounce => @announce.id}
+    %p
+      = link_to user.login, user_path(user)
+    #jobs
+      -for job in user.jobs.where("project_id IS NULL")
+        %span
+          ="#" << job.label
+    .clear
+  - else
+    - project = Project.find(candidate.author_id)
+    %a{:href => project_path(project)}
+      = image_tag project.avatar_project.url(:small), :class => "left"
+      %p.send_mail
+        = link_to "Accepter", {:controller => "projects", :action => "addcandidateproject", :iduser => @author.id, :id => project.id, :idannounce => @announce.id}
+      %p
+        = link_to project.name, project_path(project)
+      .clear
+
+

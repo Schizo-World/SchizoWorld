@@ -34,7 +34,7 @@
       <div class="project_members">
         <% for user in @project.users%>
             <% if user.url_img != nil%>
-              <a href="<%= user_path(user.id) %>"><%= image_tag user.url_img << "=small", :alt => user.login, :class => "left thumb_facebook" %></a>
+              <a href="<%= user_path(user.id) %>"><%= image_tag user.url_img + "=small", :alt => user.login, :class => "left thumb_facebook" %></a>
             <% else %>
               <a href="<%= user_path(user.id) %>"><%= image_tag user.avatar.url(:thumb), :class => "left" %></a>
             <% end %>
@@ -47,14 +47,14 @@
     <div id="social_content" class="right">
       <div id="socialMenu">
         <ul id="tabs">
-          <li class="active">
+          <li>
             <a alt="#communicate" class="tab_menu"> Communiquer </a>
           </li>
           <li>
             <a alt="#doc" class="tab_menu"> Documents </a>
           </li>
           <li>
-            <a alt="#ad" class="tab_menu"> Annonces </a>
+            <a alt="#ad" class="tab_menu"> Nos annonces </a>
           </li>
         </ul>
       </div>
@@ -71,7 +71,7 @@
       				<h5>Administrateurs</h5>
       			    <% for user in @project.users.where("admin = ?", true) %>
       			    	<% if user.url_img != nil%>
-      						<a href="<%= user_path(user) %>"><%= image_tag user.url_img << "=small", :alt => user.login, :class => "left" %></a>
+      						<a href="<%= user_path(user) %>"><%= image_tag user.url_img + "=small", :alt => user.login, :class => "left" %></a>
       			    	<% else %>
       						<a href="<%= user_path(user) %>"><%= image_tag user.avatar.url(:small), :class => "left" %></a>
       					<% end %>
@@ -84,7 +84,7 @@
       				<h5>Membres</h5>
       			    <% for user in @project.users.where("admin = ?", false) %>
       			    	<% if user.url_img != nil%>
-      						  <a href="<%= user_path(user) %>"><%= image_tag user.url_img << "=small", :alt => user.login, :class => "left" %></a>
+      						  <a href="<%= user_path(user) %>"><%= image_tag user.url_img + "=small", :alt => user.login, :class => "left" %></a>
       			    	<% else %>
       						  <a href="<%= user_path(user) %>"><%= image_tag user.avatar.url(:small), :class => "left" %></a>
       					  <% end %>
@@ -106,8 +106,13 @@
             <div id="form_job">
               <h4>Gestion des jobs</h4>
               <% for user in @project.users %>
+
+                <div id="member_job">
+                  <%=render 'formJob', :iduser => user.id %>
+                </div>
+                
                 <% if user.url_img != nil%>
-                  <a href="<%= user_path(user) %>"><%= image_tag user.url_img << "=small", :alt => user.login, :class => "left" %></a>
+                  <a href="<%= user_path(user) %>"><%= image_tag user.url_img + "=small", :alt => user.login, :class => "left" %></a>
                   <% else %>
                   <a href="<%= user_path(user) %>"><%= image_tag user.avatar.url(:small), :class => "left" %></a>
                 <% end %>
@@ -120,14 +125,12 @@
                   <% end %>
                 </div>
 
-               <%=render 'formJob', :iduser => user.id %>
-
                 <br/>
               <% end %> 
             </div>   
   	    </div>
 
-        <div id="communicate" class="tab_content">
+        <div id="communicate" class="tab_content hidden">
           <div class="write_msg">
             <% if current_user.url_img != nil%>
               <a href="<%= user_path(current_user) %>"><%= image_tag current_user.url_img << "=small", :alt => current_user.login, :class => "left" %></a>

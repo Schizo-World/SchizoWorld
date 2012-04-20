@@ -13,6 +13,9 @@
     = f.label "Ville"
     = f.text_field :location
   .field
+    = f.label "Dates"
+    = f.text_field :date
+  .field
     = f.label "Job"
     = collection_select(:user_job, :job_id, Job.all, :id, :label, :prompt => 'Sélectionner un job')
   .field

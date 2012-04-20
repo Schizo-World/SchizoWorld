@@ -40,7 +40,7 @@
             .clear
               -if user.url_img != nil
                 %a{:href => user_path(user)}
-                  = image_tag user.url_img << "=medium", :alt => user.login, :class => "left"
+                  = image_tag user.url_img << "=normal", :alt => user.login, :class => "left"
               -else
                 %a{:href => user_path(user)}
                   = image_tag user.avatar.url(:medium), :class => "left"
@@ -67,7 +67,7 @@
                   - @user = User.find(announce.author_id)
                   - if @user.url_img 
                     %a{:href => user_path(@user)}
-                      %img{ :src => @user.url_img << "=medium", :alt => @user.login}
+                      %img{ :src => @user.url_img << "=normal", :alt => @user.login}
                   - else
                     %a{:href => user_path(@user)}
                       %img{ :src => @user.avatar.url(:medium), :alt => @user.login}
@@ -76,20 +76,49 @@
                   %a{:href => project_path(@project)}
                     = image_tag @project.avatar_project.url(:medium), :class => "left"
           
-              %div.left
-                %p.send_mail
-                  %img{:src => "#", :alt => ""}
-                    = link_to "Postuler", :action => "postuler", :id => announce.author_id, :annouce_id => announce.id
+              %div{:class => "left", :style => "width:828px;"}
+                - @user = User.find(announce.author_id)
+                - candidates = AnnounceCandidate.where("announce_id = ?", announce.id)
+                - postulated = false
+                - for candidate in candidates 
+                  - if candidate.author_id == current_user.id
+                    - postulated = true
+                - if postulated == false
+                  - if announce.author_type == 1
+                    %p.send_mail
+                      %img{:src => "#", :alt => ""}
+                        = link_to "Postuler", :action => "postuleruser", :id => current_user.id, :announce_id => announce.id
+                  - else
+                    - if current_user.projects.count > 0
+                      .send_mail
+                        = form_tag(:controller => "announces", :action => "postulerproject", :announce_id => announce.id) do
+                          .field.left
+                            = collection_select(:project, :id, current_user.projects, :id, :name, {:prompt => 'Sélectionner un projet'})
+                          .actions.left
+                            = submit_tag("OK")
+
+                - else
+                  %p.send_mail
+                    %img{:src => "#", :alt => ""}
                 %h3
-                  = announce.title
+                  = announce.title 
+                  %span 
+                    - if announce.author_type == 0
+                      = " by " << @user.login
+                    - else 
+                      = " by " << @project.name
                 - job = Job.find(announce.job_id)
                 %p
                   %span 
                     = "#" << job.label
                 %p
-                  %img{:src => "/img/icons/location.png", :alt => ""}
+                  %img{:src => "/img/icons/location.png", :width => "13px", :alt => ""}
                   %span 
                     = announce.location
+                %p
+                  %img{:src => "/img/icons/calendar_empty.png", :width => "20px", :alt => ""}
+                  %span 
+                    = announce.date
                 %p.description
                   = announce.description
               .clear

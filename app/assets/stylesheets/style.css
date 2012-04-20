@@ -792,6 +792,18 @@ form.edit_user, form.edit_project {
 	margin:10px 0 0 0;
 }
 
+#member_job form.edit_project {
+    float: right;
+    width: 284px;
+    position:relative;
+    bottom: 6px;
+}
+
+#member_job form.edit_project input[type="submit"]{
+    position:relative;
+    bottom: 6px;
+}
+
 form.new_project {
 	width:420px;
 	overflow:hidden;
@@ -1148,9 +1160,17 @@ h1#announces_result {
     bottom:4px;
 }
 
+#announces h3 span {
+    margin:0 0 5px 0;
+    color: #666666;
+    font-size:13px;
+    position:relative;
+    bottom:0;
+}
+
+
 #announces p img {
     margin:0 2px 0 25px;
-    width:13px;
 }
 
 #announces p {
@@ -1162,6 +1182,7 @@ h1#announces_result {
 #announces p.description{
     display:block;
     width: 555px;
+    font-size:13px;
 }
 
 #announces .send_mail {
@@ -1174,6 +1195,21 @@ h1#announces_result {
 
 .announce {
     margin:0 0 25px 0;
+}
+
+.send_mail form select {
+    border:1px solid #D9D9F3;
+    float: left;
+    margin: 0 0 0 104px;
+    background:#fff;
+}
+
+.send_mail form input[type="submit"]{
+    background-color: #EDEDED;
+    border: medium none;
+    margin: 0 0 0 5px;
+    padding: 1px 2px;
+    width: auto;
 }
 
 /*----------------------------------------------------------------------------*/

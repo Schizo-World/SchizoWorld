@@ -5,6 +5,7 @@ class CreateAnnounces < ActiveRecord::Migration
       t.string :location
       t.integer :job_id
       t.string :description
+      t.string :date
       t.integer :author_id
       t.integer :author_type
       t.integer :statut

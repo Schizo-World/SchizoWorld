@@ -84,13 +84,13 @@
                       <% end %>
                     <% end %>
                     <% if admin == true %>
-                      <p class="right"> ADMIN </p>
+                      <p class="right"><img src="/img/icons/admin.png" alt="admin" width="20px"/> Administrateur</p>
                     <% end %>
                     <a href="<%= project_path(project) %>"><%= image_tag project.avatar_project.url(:large), :class => "left" %></a>
                     <div>
                         <h3><%= link_to project.name, project_path(project) %></h3>
                       <p><%= truncate(project.description, :length => 200, :omission => '...') %></p>
-                      <p class="send_mail"><img src="#" alt=""/><a href="#">Envoyer un message</a></p>
+                      <p class="send_mail"><img src="/img/icons/send_mail.png" width="25px" alt=""/><a href="#">Envoyer un message</a></p>
                   </div>
                       <div class="clear"></div>
                   </div>
@@ -151,8 +151,12 @@
                                 <span>#<%= job.label %></span>
                             </p>
                             <p>
-                                <img src="/img/icons/location.png" alt=""/>
+                                <img src="/img/icons/location.png" width="13px" alt=""/>
                                 <span><%= announce.location %></span>
+                            </p>
+                            <p>
+                                <img src="/img/icons/calendar_empty.png" width="20px" alt=""/>
+                                <span><%= announce.date %></span>
                             </p>
                             <p class="description"><%= announce.description %></p>
                             <div class="clear"></div>
@@ -169,13 +173,6 @@
           <% end %>
         </div>
 
-                <!--<h4>Les groupes dont vous êtes membre</h4>
-                <% for project in @user.projects.where("admin = ?", false) %>
-                    <a href="<%= :profile %>"><%= image_tag @user.avatar.url(:large), :class => "left" %></a>
-                    <h3><%= link_to project.name, project_path(project) %></h3>
-                    <p><%= project.description %></p>
-                      <br/>
-                <% end %>-->
           </div>
     </div>
     <div class="clear"></div>

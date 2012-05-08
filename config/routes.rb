@@ -7,7 +7,9 @@ Schizoworld::Application.routes.draw do
   resource :session, :only => [:new, :create, :destroy, :provider, :failure]
   resources :sessions
   resources :users
-  resources :projects
+  resources :projects do
+    resources :posts
+  end
   
   resources :videos do
   member do

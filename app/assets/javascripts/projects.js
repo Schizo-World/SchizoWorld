@@ -6,12 +6,11 @@ $(document).ready(function(){
           return false;
        }
   });*/
-  $('form#new_post')
+  $('#new_post')
     .live("ajax:success", function(e, data, x) {
+      alert(data);
       $('#posts').prepend(data);
-    });
-  $('form#new_post')
-    .live("ajax:error", function(x, s, e) {
+    }).live("ajax:error", function(x, s, e) {
       alert("fail");
     })
     .live("ajax:complete", function(x, s) {

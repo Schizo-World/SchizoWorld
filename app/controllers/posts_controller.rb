@@ -39,9 +39,25 @@ class PostsController < ApplicationController
     @post.project = Project.find(params[:project_id])
     @post.user = current_user
     if @post.save
-      render :partial => "show"
+      respond_with do |format|
+        format.html do
+          if request.xhr?
+            render :partial => "show", :layout => false, :status => :created
+          else
+            redirect_to @post.project
+          end
+        end
+      end
     else
-      redirect_to project_path(@project)
+      respond_with do |format|
+        format.html do
+          if request.xhr?
+            render :json => @post.errors, :status => :unprocessable_entity
+          else
+            render :action => :new, :status => :unprocessable_entity
+          end
+        end
+      end
     end
 
   #  respond_to do |format|

@@ -247,9 +247,19 @@ header nav ul#subscription {
 }
 
 #tree_description {
-  background-color:#EE5757;
+  background-color:#FFFFFF;
   height: 100px;
+  padding:5px;
   margin-bottom: 20px;
+}
+
+#tree_description img{
+  float:left;
+  margin-right:5px;
+}
+
+#tree_description p{
+  font-size:12px;
 }
 
 #tree_search {
@@ -259,7 +269,7 @@ header nav ul#subscription {
 }
 
 #tree_results {
-  background-color:#026837;
+  background-color:#FFFFFF;
   height:330px;
   overflow:auto;
 }

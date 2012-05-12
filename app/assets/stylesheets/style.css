@@ -247,9 +247,19 @@ header nav ul#subscription {
 }
 
 #tree_description {
-  background-color:#EE5757;
+  background-color:#FFFFFF;
   height: 100px;
+  padding:5px;
   margin-bottom: 20px;
+}
+
+#tree_description img{
+  float:left;
+  margin-right:5px;
+}
+
+#tree_description p{
+  font-size:12px;
 }
 
 #tree_search {
@@ -259,7 +269,7 @@ header nav ul#subscription {
 }
 
 #tree_results {
-  background-color:#026837;
+  background-color:#FFFFFF;
   height:330px;
   overflow:auto;
 }
@@ -1361,4 +1371,26 @@ footer p {
 	height:78px;
 	position:absolute;
 	top:-1px;
+}
+
+/* COMMUNICATION */
+
+div#posts {
+	margin-top: 10px;
+}
+
+div.post {
+	display: block;
+	min-height: 50px;
+	border-top: 1px grey dotted;
+	margin-bottom: 2px;
+	padding-top: 2px;
+}
+
+div#posts :first-child {
+	border-top: none;
+}
+
+div.post img.left {
+	margin-right: 5px;
 }

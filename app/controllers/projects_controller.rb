@@ -3,8 +3,6 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
-    @announces = Announce.where("author_id = ? AND author_type = ?", @project.id, '1')
-    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @projects }
@@ -15,8 +13,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
+    @post = Post.new
     @announces = Announce.where("author_id = ? AND author_type = ?", @project.id, '1')
-
+ 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @project }
@@ -155,5 +154,5 @@ class ProjectsController < ApplicationController
     JobUser.where("project_id = ? AND user_id = ? AND job_id = ?",@project.id, @user.id, job_to_destroy.id).delete_all
     redirect_to edit_project_path(@project)
   end
-  
+    
 end

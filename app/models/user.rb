@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   
   has_attached_file :avatar, :styles => { :large => "180x180#", :medium => "100x100#", :small => "50x50#", :thumb => "30x30#" }
   has_many :authorizations
+  has_many :posts
 
   validates :login, :presence   => true,
                     :uniqueness => true,

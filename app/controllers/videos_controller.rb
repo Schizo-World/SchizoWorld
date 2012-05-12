@@ -1,9 +1,21 @@
 class VideosController < InheritedResources::Base
 
+  def new
+    @project = Project.find(params[:project_id])
+    @video = Video.new
+    @nodes = get_tree(0)
+    File.open("public/js/libs/tree_data.json", "w"){ #Specifier ou créer le fichier
+      |f| f.write(@nodes.to_json # Ecrire dans le fichier le tableau "nodes" précédement créé.
+    )}
+  end
+
   def upload
     @video = Video.create(params[:video])
+    @video.update_attribute(:parent_id, params[:parent_id])
+    @project = Project.find(params[:video][:project_id])
     if @video
       @upload_info = Video.token_form(params[:video], save_video_new_video_url(:video_id => @video.id))
+      @project.update_attribute(:status, "Fini")
     else
       respond_to do |format|
         format.html { render "/videos/new" }
@@ -32,10 +44,14 @@ class VideosController < InheritedResources::Base
     if params[:status].to_i == 200
       @video.update_attributes(:yt_video_id => params[:id].to_s, :is_complete => true)
       Video.delete_incomplete_videos
+      nodes = get_tree(0)
+      File.open("public/js/libs/tree_data.json", "w"){ #Specifier ou créer le fichier
+        |f| f.write(nodes.to_json # Ecrire dans le fichier le tableau "nodes" précédement créé.
+      )}
     else
       Video.delete_video(@video)
     end
-    redirect_to videos_path, :notice => "video successfully uploaded"
+    redirect_to "/", :notice => "video successfully uploaded"
   end
 
   def destroy
@@ -56,6 +72,39 @@ class VideosController < InheritedResources::Base
       flash[:error] = "Sorry the comment has not been added."
     end
     redirect_to @video    
+  end
+
+  def has_child(id)
+    if (Video.exists?(Video.find_by_parent_id(id)))
+      result = true
+    else
+      result = false
+    end
+    return result
+  end
+    
+  def get_tree(id)
+    
+    childrens = Video.where(:parent_id => id)
+    elements = Array.new
+
+    project = Project.find(video.project_id)
+    img = project.avatar_project_file_name
+    img_url = "/system/avatar_projects/" + video.project_id.to_s + "/small/" + img
+    
+    childrens.each do |video|
+
+      if (has_child(video.id))
+        element = {'id' => video.id, 'title' => video.title, 'img' => img_url, 'children' => get_tree(video.id) }
+      else
+        element = {'id' => video.id, 'title' => video.title, 'children' => [] }
+      end
+      
+      elements << element
+      
+    end
+      
+    return elements      
   end
 
   protected

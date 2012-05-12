@@ -6,6 +6,14 @@
     <h1><%= link_to @project.name, project_path(@project) %></h1>
 
     <div class="left info_sup">
+    <% admin = false %>
+    <% members = @project.users.where("admin = ?", true) %>
+    <% for member in members %>
+      <% if member.id == current_user.id %>
+        <% admin = true %>
+      <% end %>
+    <% end %>
+    <% if admin == true %>
       <div class="info">
         <img src="/img/icons/pencil.png" alt="" class="left"/>
         <p><%=link_to 'Editer la fiche projet', edit_project_path(@project)%></p>
@@ -14,7 +22,15 @@
         <img src="/img/icons/file.png" alt="" class="left"/>
         <p><%=link_to 'Voir la fiche publique', :controller => "projects", :action => "show", :public => true%></p>
       </div>
+      <% video = Video.where("project_id = ?", @project.id) %>
+      <% if video.blank? %>
+        <div class="info">
+          <img src="/img/icons/film.png" alt="" class="left"/>
+          <p><%=link_to 'Ajouter la vidéo', :controller => "videos", :action => "new", :project_id => @project.id%></p>
+        </div>
+      <% end %>
       <br/><br/>
+    <% end %>
 
       <% if @project.city %>
         <div class="info">
@@ -65,7 +81,7 @@
       		<%= render 'form' %>
       		<div class="clear"></div>
       		<br/><br/>
-
+          
       		<h4>Gestion des membres</h4>
       			<div class="left members">
       				<h5>Administrateurs</h5>

@@ -5,6 +5,8 @@ class CreateVideos < ActiveRecord::Migration
       t.string   :description
       t.string   :yt_video_id
       t.boolean  :is_complete, :default => false
+      t.integer  :parent_id
+      t.integer  :project_id
       t.timestamps
     end
   end

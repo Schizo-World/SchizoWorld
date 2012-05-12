@@ -19,7 +19,7 @@
         -if !@projects.blank?
           -for project in @projects
             .clear
-              %a{:href => project_path(project)}
+              %a{:href => project_path(project, :public => true)}
                 = image_tag project.avatar_project.url(:medium), :alt => project.name, :class => "left"
               %h3
                 = project.name

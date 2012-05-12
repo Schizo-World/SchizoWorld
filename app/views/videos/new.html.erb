@@ -1,21 +1,175 @@
-<div id="container" class="socialContainer">
-  <div class="block">
-    <div class="secondary-navigation">
-      <ul class="wat-cf">
-        <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", videos_path  %></li>
-        <li class="active"><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_video_path %></li>
-      </ul>
-    </div>          
-    <div class="content">            
-      <h2 class="title"><%= t("web-app-theme.new", :default => "New")%>  Video</h2>
-      <div class="inner">
-        <p>Step 1: add information about your video.</p>
-        <%= form_for @video, :url => upload_new_video_path, :html => { :class => :form } do |f| -%>
-          <%= render :partial => "form", :locals => {:f => f} %>
-        <% end -%>
+<div id="sky">
+  <div id="container" class="socialContainer">
+    <a href="<%=project_path(@project)%>">
+      <img class="img_sheet" src="<%= @project.avatar_project.url(:large) %>" alt="<%= @project.name %>"/>
+    </a>
+    <h1><%= link_to @project.name, project_path(@project) %></h1>
+
+    <div class="left info_sup">
+      <div class="info">
+        <img src="/img/icons/pencil.png" alt="" class="left"/>
+        <p><%=link_to 'Editer la fiche projet', edit_project_path(@project)%></p>
+      </div>
+      <div class="info">
+        <img src="/img/icons/file.png" alt="" class="left"/>
+        <p><%=link_to 'Voir la fiche publique', :controller => "projects", :action => "show", :public => true%></p>
+      </div>
+      <% video = Video.where("project_id = ?", @project.id) %>
+      <% if video.blank? %>
+        <div class="info">
+          <img src="/img/icons/film.png" alt="" class="left"/>
+          <p><%=link_to 'Ajouter la vidéo', :controller => "videos", :action => "new", :project_id => @project.id%></p>
+        </div>
+      <% end %>
+      <br/><br/>
+
+      <% if @project.city %>
+        <div class="info">
+          <img src="/img/icons/location.png" alt="" class="left"/>
+          <p><%= @project.city %></p> 
+        </div>
+      <%end%>
+
+      <% if @project.status %>
+        <div class="info">
+          <img src="/img/icons/process.png" alt="" class="left"/>
+          <p><%= @project.status %></p> 
+        </div>
+      <%end%>  
+      <br/>
+
+      <div class="project_members">
+        <% for user in @project.users%>
+            <% if user.url_img != nil%>
+              <a href="<%= user_path(user.id) %>"><%= image_tag user.url_img + "=small", :alt => user.login, :class => "left thumb_facebook" %></a>
+            <% else %>
+              <a href="<%= user_path(user.id) %>"><%= image_tag user.avatar.url(:thumb), :class => "left" %></a>
+            <% end %>
+            <p class="left"><a href="<%= user_path(user) %>"><%= user.login %></a></p>
+        <% end %>  
+      </div>
+
+    </div>
+
+    <div id="social_content" class="right">
+      <div id="socialMenu">
+        <ul id="tabs">
+          <li>
+            <a alt="#communicate" class="tab_menu"> Communiquer </a>
+          </li>
+          <li>
+            <a alt="#doc" class="tab_menu"> Documents </a>
+          </li>
+          <li>
+            <a alt="#ad" class="tab_menu"> Nos annonces </a>
+          </li>
+        </ul>
+      </div>
+
+      <div id="content">
+        <div id="form">
+          <h4>Ajouter la vidéo - Etape 1 </h4>
+          <%= form_for @video, :url => upload_new_video_path, :html => { :class => :form } do |f| -%>
+            <%= render :partial => "form", :locals => {:f => f} %>
+          <% end -%>
+          <div class="clear"></div>
+
+        </div>
+
+        <div id="communicate" class="tab_content hidden">
+          <div class="write_msg">
+            <% if current_user.url_img != nil%>
+              <a href="<%= user_path(current_user) %>"><%= image_tag current_user.url_img << "=small", :alt => current_user.login, :class => "left" %></a>
+            <% else %>
+              <a href="<%= user_path(current_user) %>"><%= image_tag current_user.avatar.url(:small), :class => "left" %></a>
+            <% end %>
+            <%= form_for(@project) do |f| %>
+              <%= f.text_area :message, :value => "Rédiger un message..." %>
+            <% end %>
+          </div>
+        </div>
+
+        <div id="doc" class="tab_content hidden">
+          <p>documents</p>
+        </div>
+
+        <div id="ad" class="tab_content hidden">
+          <% admin = false %>
+          <% members = @project.users.where("admin = ?", true) %>
+          <% for member in members %>
+            <% if member.id == current_user.id %>
+              <% admin = true %>
+            <% end %>
+          <% end %>
+          <% if admin == true %>
+            <%= render :partial => "announces/new", :locals => {:@announce => Announce.new, :@author_type => '1', :@author_id => @project.id} %>
+          <% end %>
+          <div class="clear"></div>
+          <%if !@announces.blank?%>
+              <div id="announces">
+                  <h4>Mes annonces</h4>
+                    <% for announce in @announces %>
+                      <% candidates = AnnounceCandidate.where("announce_id = ?", announce.id) %>
+                      <% singular_sentence = "candidat a postulé" %>
+                      <% plural_sentence = "candidats ont postulé" %>
+                      <% negative_sentence = "Aucun candidat n'a postulé" %>
+                      <% if candidates.count == 0 %>
+                        <% sentence = negative_sentence %>
+                      <% elsif candidates.count == 1 %>
+                        <% sentence = "#{candidates.count} " << singular_sentence %>
+                      <% else %>
+                        <% sentence = "#{candidates.count} " << plural_sentence %>
+                      <% end %>
+                      <% available = false %>
+                      <% for candidate in candidates %>
+                        <% if candidate.accepted %>
+                          <% available = true %>
+                        <% end %>
+                      <% end %>
+                      <% idcss = "#{announce.id}" %>
+
+                      <div class="announce">
+                          <a href="<%= project_path(@project) %>">
+                            <%= image_tag @project.avatar_project.url(:medium), :class => "left"%>
+                          </a>
+                          <p class="send_mail"><img src="#" alt=""/>
+                            <% if candidates.count > 0 && available == false%>
+                              <%= link_to sentence, "##{announce.id}", :class => "popup" %>
+                            <% elsif available == true %>
+                              <span class="left">Pourvu</span>
+                            <% else %>
+                              <%= sentence %>
+                            <% end %>
+                          </p>
+                          <div>
+                            <h3><%= announce.title%></h3>
+                            <% job = Job.find(announce.job_id) %>
+                            <p>
+                                <span>#<%= job.label %></span>
+                            </p>
+                            <p>
+                                <img src="/img/icons/location.png" alt=""/>
+                                <span><%= announce.location %></span>
+                            </p>
+                            <p class="description"><%= announce.description %></p>
+                            <div class="clear"></div>
+                          </div>
+                      </div>
+                      <% if candidates.count > 0 %>
+                        <div style="display: none;">
+                          <div id="<%= idcss %>" class="manage_candidates">
+                            <%= render :partial => "announces/candidates", :locals => {:@announce_id => announce.id}%>
+                          </div>
+                        </div>
+                      <% end %>
+                      <div class="clear"></div>
+                    <% end %>
+            </div>
+          <% end %>
+        </div>
+
       </div>
     </div>
+    <div class="clear"></div>
   </div>
 </div>
-
-<% content_for :sidebar, render(:partial => 'sidebar') -%>

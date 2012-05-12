@@ -786,6 +786,68 @@ MENU SOCIAL
 }
 
 /*----------------------------------------------------------------------------*/
+/*--------------------------------- VIDEO ------------------------------------*/
+/*----------------------------------------------------------------------------*/
+#info_video {
+    float:right;
+    width:393px;
+}
+
+#info_video input {
+    border: 1px solid #D9D9F3;
+    float: right;
+    font-size: 1em;
+    width: 345px;
+}
+
+#info_video textarea {
+    border: 1px solid #D9D9F3;
+    height: 140px;
+    margin: 3px 239px 0 0;
+    width: 390px;
+    font-family: 'Asap',sans-serif;
+    font-size:1em;
+}
+
+#info_video .field[type="submit"] {
+    background-color:#ededed;
+    padding:2px 5px;
+    margin: 10px 0 0;
+    border:none;
+    width:auto;
+}
+
+#upload_video {
+    width: 491px;
+}
+
+#upload_video input {
+    border: 1px solid #D9D9F3;
+    float: right;
+    font-size: 1em;
+    margin: 0 82px 0 0;
+    width: 345px;
+}
+
+#upload_video textarea {
+    border: 1px solid #D9D9F3;
+    height: 140px;
+    margin: 3px 239px 0 0;
+    width: 390px;
+    font-family: 'Asap',sans-serif;
+    font-size:1em;
+}
+
+#upload_video input[type="submit"] {
+    background-color:#ededed;
+    padding:2px 5px;
+    margin: 10px 113px 0 0;
+    border:none;
+    width:auto;
+}
+
+
+/*----------------------------------------------------------------------------*/
 /*------------------------ EDIT PROFILE / PROJECT ----------------------------*/
 /*----------------------------------------------------------------------------*/
 form.edit_user, form.edit_project {
@@ -813,7 +875,7 @@ form.new_announce {
     margin:0 0 35px 0;
 }
 
-.edit_user .field, .edit_project .field, .new_project .field, .new_announce .field{
+.edit_user .field, .edit_project .field, .new_project .field, .new_announce .field, #info_video .field{
 	margin:0 0 7px 0;
 	font-size:13px;
 }
@@ -841,7 +903,7 @@ form.new_announce {
 	margin: 0 0 0 35px;
 }
 
-.edit_user label, .edit_project label, .new_project label, .new_announce label{
+.edit_user label, .edit_project label, .new_project label, .new_announce label, #info_video label{
 	margin:0 15px 0 0;
 	font-weight:bold;
 }

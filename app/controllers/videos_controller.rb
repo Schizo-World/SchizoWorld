@@ -1,14 +1,20 @@
-class VideosController < InheritedResources::Base
-
+class VideosController < ApplicationController
+  
   def new
     @project = Project.find(params[:project_id])
     @video = Video.new
     @nodes = get_tree(0)
-    File.open("public/js/libs/tree_data.json", "w"){ #Specifier ou créer le fichier
-      |f| f.write(@nodes.to_json # Ecrire dans le fichier le tableau "nodes" précédement créé.
-    )}
   end
 
+  def show
+    @video = Video.find(params[:id])
+ 
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @video }
+    end
+  end
+  
   def upload
     @video = Video.create(params[:video])
     @video.update_attribute(:parent_id, params[:parent_id])
@@ -87,17 +93,17 @@ class VideosController < InheritedResources::Base
     
     childrens = Video.where(:parent_id => id)
     elements = Array.new
-
-    project = Project.find(video.project_id)
-    img = project.avatar_project_file_name
-    img_url = "/system/avatar_projects/" + video.project_id.to_s + "/small/" + img
     
     childrens.each do |video|
 
+      project = Project.find(video.project_id)
+      img = project.avatar_project_file_name
+      img_url = "/system/avatar_projects/" + video.project_id.to_s + "/small/" + img
+      
       if (has_child(video.id))
-        element = {'id' => video.id, 'title' => video.title, 'img' => img_url, 'children' => get_tree(video.id) }
+         element = {'id' => video.id, 'name' => video.title, 'data' => {"url" => img_url, "description" => video.description}, 'children' => get_tree(video.id) }
       else
-        element = {'id' => video.id, 'title' => video.title, 'children' => [] }
+         element = {'id' => video.id, 'name' => video.title, 'data' => {"url" => img_url, "description" => video.description}, 'children' => [] }
       end
       
       elements << element
@@ -106,7 +112,7 @@ class VideosController < InheritedResources::Base
       
     return elements      
   end
-
+  
   protected
     def collection
       @videos ||= end_of_association_chain.completes

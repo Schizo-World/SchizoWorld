@@ -1,6 +1,7 @@
 Schizoworld::Application.routes.draw do
 
   resources :announces
+  resources :messages
 
   match '/activate/:activation_code' => 'users#activate', :as => :activate, :activation_code => nil
 

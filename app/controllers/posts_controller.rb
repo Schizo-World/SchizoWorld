@@ -39,27 +39,29 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @post.project = Project.find(params[:project_id])
     @post.user = current_user
-    if @post.save
-      respond_with do |format|
-        format.html do
-          if request.xhr?
-            render :partial => "show", :layout => false, :status => :created
-          else
-            redirect_to @post.project
-          end
-        end
-      end
-    else
-      respond_with do |format|
-        format.html do
-          if request.xhr?
-            render :json => @post.errors, :status => :unprocessable_entity
-          else
-            render :action => :new, :status => :unprocessable_entity
-          end
-        end
-      end
-    end
+    @post.save
+    redirect_to @post.project
+    #if true #@post.save
+    #  respond_with do |format|
+    #    format.html do
+    #      if request.xhr?
+    #        render :partial => "show", :layout => false, :status => :created
+    #      else
+    #        redirect_to @post.project
+    #      end
+    #    end
+    #  end
+    #else
+    #  respond_with do |format|
+    #    format.html do
+    #      if request.xhr?
+    #        render :json => @post.errors, :status => :unprocessable_entity
+    #      else
+    #        render :action => :new, :status => :unprocessable_entity
+    #      end
+    #    end
+    #  end
+    #end
 
   #  respond_to do |format|
   #    if @post.save

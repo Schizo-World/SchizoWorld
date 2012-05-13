@@ -24,7 +24,7 @@ gem 'html5-rails', :git => 'git://github.com/sporkd/html5-rails.git'
 gem 'configatron'
 gem 'omniauth'
 
-gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git", :branch => "rails3"
+gem "paperclip"#, :git => "git://github.com/thoughtbot/paperclip.git", :branch => "rails3"
 gem "rmagick"
 
 # To use debugger

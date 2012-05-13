@@ -1,9 +1,10 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  
   has_many :announces, :foreign_key => "author_id"
   has_many :announce_candidates, :foreign_key => "author_id"
+  has_many :notifications
+  has_and_belongs_to_many :notifications
   
   include Authentication
   include Authentication::ByPassword

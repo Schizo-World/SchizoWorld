@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 [{"id":1,"title":"Root","img":"/system/avatar_projects/0/small/favicon114.png","children":[{"id":5,"title":"Cupcake ipsum","children":[]}]}]
+=======
+[{"id":1,"name":"Awesome","data":{"url":"/system/avatar_projects/1/small/logo_multiple.png","description":"Coucou, awesome project !"},"children":[]}]
+>>>>>>> 94a65e16b9c5437d7ec20381855035d6b9443bd8

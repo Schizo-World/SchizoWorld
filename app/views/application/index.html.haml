@@ -17,15 +17,9 @@
           #tree_search
             %p Filtres pour la recherche
           #tree_results
+            %h3 RESULTATS VIDEOS
             %br/
-            RESULTATS
-            %br/
-            DE
-            %br/
-            LA
-            %br/
-            RECHERCHE
-            %br/
+            = render :partial => "videos/show_all"
             %a{:href => "javascript:displayNewNode(2)"} Node2
             %br/
             %a{:href => "javascript:displayNewNode(3)"} Node3
@@ -33,30 +27,6 @@
             %a{:href => "javascript:displayNewNode(4)"} Node4
             %br/
             %a{:href => "javascript:displayNewNode(5)"} Node5
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
     %section#project.center_content_wrapper
       .center_wrapper
         %h3 It's a small schizophrenic world

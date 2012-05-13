@@ -1,10 +1,11 @@
 .post
   %a{:href => user_path(@post.user.id)}
     - if @post.user.url_img != nil
-      = image_tag @post.user.url_img << "=small", :alt => @post.user.login, :class => "left"
+      = image_tag @post.user.url_img, :alt => @post.user.login, :class => "left"
     - else
       = image_tag @post.user.avatar.url(:small), :class => "left"
   %b
     = link_to(@post.user.login, user_path(@post.user))
   %p
     = @post.body
+

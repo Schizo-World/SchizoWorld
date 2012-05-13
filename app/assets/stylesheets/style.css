@@ -873,7 +873,8 @@ form.edit_user, form.edit_project {
 
 #member_job form.edit_project input[type="submit"]{
     position:relative;
-    bottom: 6px;
+    bottom: 23px;
+    float:right;
 }
 
 form.new_project {
@@ -974,7 +975,7 @@ form.new_announce {
 	margin: 0 28px 0 0;
 }
 
-.edit_user input[type="submit"], .edit_project input[type="submit"], .new_project input[type="submit"], .new_announce input[type="submit"]{
+.edit_user input[type="submit"], .edit_project input[type="submit"], .new_project input[type="submit"], .new_announce input[type="submit"], .edit_video input[type="submit"]{
 	background-color:#ededed;
 	padding:2px 5px;
 	margin: 10px 340px 0 0;
@@ -982,17 +983,30 @@ form.new_announce {
 	width:auto;
 }
 
+.edit_video input[type="submit"] {
+    margin: 7px 0 0 270px;
+}
+
 .new_project input[type="submit"] {
 	margin: 10px 28px 0 0;
 }
 
-.edit_project textarea, .new_project textarea, .new_announce textarea {
+.edit_project textarea, .new_project textarea, .new_announce textarea, .edit_video textarea {
     border: 1px solid #D9D9F3;
     height: 140px;
     margin: 3px 239px 0 0;
     width: 390px;
     font-family: 'Asap',sans-serif;
 	font-size:1em;
+}
+
+.edit_video textarea {
+    border: 1px solid #D9D9F3;
+    height: 85px;
+    margin: 0 239px 0 7px;
+    width: 390px;
+    font-family: 'Asap',sans-serif;
+    font-size:0.8em;
 }
 
 .new_announce textarea {
@@ -1115,7 +1129,10 @@ form.new_announce {
 }
 
 #instant_signup label, #normal_signup label {
-	margin:0 7px 0 0;
+    display: block;
+    float: left;
+    margin: 0 7px 0 0;
+    width: 122px;
 }
 
 #instant_signup input, #normal_signup input {
@@ -1145,6 +1162,69 @@ form.new_announce {
 .popup_login {
     width:450px;
     padding:25px 0 15px 0;
+}
+
+/*----------------------------------------------------------------------------*/
+/*--------------------------------- POSTS ------------------------------------*/
+/*----------------------------------------------------------------------------*/
+.new_post textarea {
+    border: 1px solid #D9D9F3;
+    width: 667px;
+    height: 48px;
+}
+
+.new_post input[type="submit"] {
+    float:right;
+    background-color:#ededed;
+    padding:2px 5px;
+    border:none;
+    margin:7px 4px 0 0;
+}
+
+.write_msg {
+    margin:0 0 15px 0;
+}
+
+.post {
+    border-bottom:1px solid #ededed;
+    padding-bottom:5px;
+}
+
+/*----------------------------------------------------------------------------*/
+/*-------------------------------- COMMENTS ----------------------------------*/
+/*----------------------------------------------------------------------------*/
+#comments {
+    margin:30px 0 15px 0;
+    width:458px;
+}
+
+#comments ul {
+    margin:0;
+    padding:0;
+}
+
+#comments ul li {
+    list-style-type:none;
+    position:relative;
+    right:8px;
+    clear:both;
+}
+
+#comments img {
+    margin:0 7px 15px 0;
+}
+
+#comments .comment_login {
+    font-size:1.3em;
+    position:relative;
+    bottom:4px 
+}
+
+#comments .comment_date {
+    color: #666666;
+    font-size: 0.7em;
+    position: relative;
+    top: 5px;
 }
 
 /*----------------------------------------------------------------------------*/

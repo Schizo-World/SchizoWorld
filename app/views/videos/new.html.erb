@@ -46,6 +46,7 @@
               <a href="<%= user_path(user.id) %>"><%= image_tag user.avatar.url(:thumb), :class => "left" %></a>
             <% end %>
             <p class="left"><a href="<%= user_path(user) %>"><%= user.login %></a></p>
+            <div class="clear"></div>
         <% end %>  
       </div>
 
@@ -57,9 +58,9 @@
           <li>
             <a alt="#communicate" class="tab_menu"> Communiquer </a>
           </li>
-          <li>
+          <!--<li>
             <a alt="#doc" class="tab_menu"> Documents </a>
-          </li>
+          </li>-->
           <li>
             <a alt="#ad" class="tab_menu"> Nos annonces </a>
           </li>

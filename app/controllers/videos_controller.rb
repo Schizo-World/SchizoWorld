@@ -66,12 +66,15 @@ class VideosController < InheritedResources::Base
 
   def add_comment
     @video = Video.find(params[:id])
-    if @video.create_comment(params[:video][:comment])
-      flash[:notice] = "Comment has been sucessfully added."
-    else
-      flash[:error] = "Sorry the comment has not been added."
-    end
-    redirect_to @video    
+    @project = Project.find(params[:video][:project_id])
+    @video.create_comment(params[:video][:comment])
+    @video.comments.last.update_attribute(:user_id, params[:video][:user_id])
+    #if @video.create_comment(params[:video][:comment])
+    #  flash[:notice] = "Comment has been sucessfully added."
+    #else
+    #  flash[:error] = "Sorry the comment has not been added."
+    #end
+    redirect_to project_path(@project, :public => true)  
   end
 
   def has_child(id)
@@ -87,12 +90,12 @@ class VideosController < InheritedResources::Base
     
     childrens = Video.where(:parent_id => id)
     elements = Array.new
-
-    project = Project.find(video.project_id)
-    img = project.avatar_project_file_name
-    img_url = "/system/avatar_projects/" + video.project_id.to_s + "/small/" + img
     
     childrens.each do |video|
+
+      project = Project.find(video.project_id)
+      img = project.avatar_project_file_name
+      img_url = "/system/avatar_projects/" + video.project_id.to_s + "/small/" + img
 
       if (has_child(video.id))
         element = {'id' => video.id, 'title' => video.title, 'img' => img_url, 'children' => get_tree(video.id) }

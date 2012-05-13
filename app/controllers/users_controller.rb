@@ -33,7 +33,9 @@ class UsersController < ApplicationController
 
   def show 
     @user = User.find(params[:id])
-    @announces = Announce.where("author_id = ? AND author_type = ?", current_user.id, '0')
+    if current_user != nil
+      @announces = Announce.where("author_id = ? AND author_type = ?", current_user.id, '0')
+    end
   end
 
   def edit

@@ -29,7 +29,6 @@
                     = image_tag @project.avatar_project.url(:medium), :class => "left"
           
               %div{:class => "left", :style => "width:828px;"}
-                - @user = User.find(announce.author_id)
                 - candidates = AnnounceCandidate.where("announce_id = ?", announce.id)
                 - postulated = false
                 - for candidate in candidates 
@@ -75,7 +74,7 @@
                   = announce.description
               .clear
             .clear
-      -else
+      - elsif @announces.blank?
         %p
           = "Aucune annonce a été postée"
       .clear

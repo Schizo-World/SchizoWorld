@@ -55,6 +55,7 @@
               <a href="<%= user_path(user.id) %>"><%= image_tag user.avatar.url(:thumb), :class => "left" %></a>
             <% end %>
             <p class="left"><a href="<%= user_path(user) %>"><%= user.login %></a></p>
+            <div class="clear"></div>
         <% end %>  
       </div>
 
@@ -133,6 +134,7 @@
                   <a href="<%= user_path(user) %>"><%= image_tag user.avatar.url(:small), :class => "left" %></a>
                 <% end %>
                 <p><%= user.login %></p>
+                <div class="clear"></div>
 
                 <div class="job_box">
                   <% for job in user.jobs.where("project_id = ?", @project) %>

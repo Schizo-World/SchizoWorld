@@ -8,6 +8,7 @@ var labelType, useGradients, nativeTextSupport, animate;
         success: function(data) {
           //success
           init(data);
+          loadData(data);
         }, 
         error: function (xhr, ajaxOptions, thrownError){
           //didn't work!'
@@ -40,6 +41,20 @@ var Log = {
 
 function init(data){
 
+var node_displayed = 1;
+var data;
+
+function displayNewNode(node){
+  $('#infovis-canvaswidget').remove(); 
+  $('#infovis-label').remove(); 
+  node_displayed = node;
+  init();
+}
+
+function loadData(dataLoaded){
+  data = dataLoaded;
+}
+
     //init data
     var jsonString = JSON.stringify(data); //convert the json object in a String
     jsonString = jsonString.slice(1); //remove first sq Barcket[
@@ -47,6 +62,7 @@ function init(data){
     var json = JSON.parse(jsonString); //Parse my json from the jsonString
     
     //end
+
     //init Spacetree
     //Create a new ST instance
     var st = new $jit.ST({
@@ -60,8 +76,8 @@ function init(data){
         levelDistance: 50,
         //set orientation
         orientation: 'bottom',
-        //set the levels to show each time
-        levelsToShow:1,
+		//set the levels to show each time
+		levelsToShow:1,
         //enable panning
         Navigation: {
           enable:true,
@@ -85,7 +101,7 @@ function init(data){
         },
         
         onBeforeCompute: function(node){
-            Log.write("loading ... "/* + node.name*/);
+            Log.write("loading ... ");
         },
         
         onAfterCompute: function(){
@@ -96,10 +112,19 @@ function init(data){
         //Use this method to add event handlers and styles to
         //your node.
         onCreateLabel: function(label, node){
-            label.id = node.id;            
+
+            /*label.id = node.id;  
+            label.title = node.title;
+            alert(node.id);
+            alert(node.img);   
+            alert(node.title);       
             label.innerHTML = "<div id='tree_node' />" + "<div id='tree_image'>" + "<img src='/img/eastwood.png' height='45px'/>" + "</div></div>";
+*/
+            label.id = node.id;
+            var url_small = '/img/eastwood.png';
+            label.innerHTML = "<div id='tree_node' />" + "<div id='tree_image'>" + "<img src='"+ url_small +"' height='45px'/>" + "</div></div>";
             label.onclick = function(){
-              st.onClick(node.id);  
+              st.onClick(node.id);
             };
             
             //set label styles
@@ -122,6 +147,10 @@ function init(data){
             //root node and the selected node.
             if (node.selected) {
                 node.data.$color = "#ff0000";
+                var url_medium = '/img/eastwood.png';
+                document.getElementById("tree_description_title").innerHTML = node.name;
+                document.getElementById("tree_description_pic").src = url_medium;
+                document.getElementById("tree_description_text").innerHTML = node.data.description;
             }
             else {
                 delete node.data.$color;
@@ -161,7 +190,10 @@ function init(data){
     st.geom.translate(new $jit.Complex(0, 300), "current");
     //emulate a click on the root node.
     //st.onClick(st.root); //'node4106'
-    var node_displayed = st.root;
     st.onClick(node_displayed);
     //end
+
 }
+
+}
+

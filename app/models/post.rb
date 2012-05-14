@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
 
 	acts_as_commentable
 
-	attr_accessible :title, :body
+	attr_accessible :body
 
 
 end

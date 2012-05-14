@@ -1,0 +1,42 @@
+<br/><br/><br/><br/>
+<p id="notice"><%= notice %></p>
+<h1>Conversation avec</h1>
+<% @conversation.recipients.each do |r| -%>
+  <%= image_tag r.url_img << "=small", :title => r.login, :alt => r.login, :class => "left thumb_facebook" %>
+<% end -%>
+<div id="conversation">
+<% 
+  @conversation.messages.each do |message|
+    sender = message.sender
+%>
+  <p class="left" style="margin-left: 5px; padding-right: 40px">
+    <a href="<%= user_path(message.sender) %>">
+<% if sender.url_img != nil -%>
+  <%= image_tag sender.url_img << "=small", :title => sender.login, :alt => sender.login, :class => "left thumb_facebook" %>
+<% else -%>
+ <%= image_tag sender.avatar.url(:thumb), :title => sender.login, :class => "left" %>
+<% end -%>
+  <%= sender.login %>
+    </a>
+  </p>
+  <p class="left">
+    <%= message.body %>
+  </p>
+  <div class="clear"></div>
+<%  end -%>
+</div>
+<div id="reply_message">
+  <%= form_tag "/messages", :html => {:id => "new_form"} %>
+  <div class="field">
+  <%= label_tag(:to, "Destinataire") %>
+  <%= autocomplete_field_tag :to, '', messages_autocomplete_user_login_path, :id_element => '#to_uid' %>
+  <%= hidden_field_tag :to_uid %>
+  </div>
+  <div class="field">
+  <%= label_tag :body, 'Message' %>
+  <%= text_area_tag :body, '', :size => "30x5" %>
+  <div class="actions">
+  <%= submit_tag 'Envoyer' %>
+  </div>
+
+</div>

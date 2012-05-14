@@ -1,24 +1,10 @@
-= form_for message, :url => user_messages_path(user), :html => {:class => "MainForm"} do |f|
-
-  -if message.reply_to
-    =f.hidden_field :to
-    =f.hidden_field :parent_id
-  -else
-    %label{:for => 'message_to'} 
-      =:to.l
-      %em= "(" + :type_a_username.l + ")"
-    = text_field_tag 'message[to]', @message.to, {:autocomplete => "off", :size => 35, :id => "message_to"}
-    .auto_complete#message_to_auto_complete
-      = auto_complete_field 'message_to', {:url => auto_complete_for_username_user_messages_path(@user), :tokens=>','}
-
-  -if @reply  
-    = f.hidden_field :subject  
-  -else
-    %label{:for => 'message_subject'}= :subject.l + ":"
-    = f.text_field :subject
-
-  %label{:for => "message_body"}= :message.l + ":"
-  = f.text_area :body
-
-  %p
-    = submit_tag :send.l
+= form_tag "/messages", :html => {:id => "new_form"} do
+  .field
+    = label_tag(:to, "Destinataire")
+    = autocomplete_field_tag :to, '', messages_autocomplete_user_login_path, :id_element => '#to_uid'
+    = hidden_field_tag :to_uid
+  .field
+    = label_tag :body, 'Message'
+    = text_area_tag :body, '', :size => "30x5"
+  .actions
+    = submit_tag 'Envoyer'

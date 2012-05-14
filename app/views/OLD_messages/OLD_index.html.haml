@@ -1,0 +1,8 @@
+=render :partial => 'messages/sidebar_nav'
+
+- if params[:mailbox] == "sent"
+  = form_tag delete_selected_user_messages_path(@user), :class => "MainForm" do
+    = render :partial => "messages/sent"
+- else
+  = form_tag messages_path(@user), :class => "MainForm" do #delete_message_threads_user_messages_path(@user), :class => "MainForm" do
+    = render :partial => "messages/inbox"

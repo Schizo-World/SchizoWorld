@@ -1,0 +1,24 @@
+%br
+%br
+%br
+%br
+%h1 Messages supprimés
+
+- if @messages.nil? || @messages.empty?
+  %p Aucun nouveau message.
+- else
+  %table
+    %tr
+      %th
+      %th
+      %th
+    %tr
+    - @messages.each do |message|
+      %tr
+        %td= link_to 'Show', message
+        %td
+        %td
+
+%br
+
+= link_to 'New Message', "#", :class => "new_message"

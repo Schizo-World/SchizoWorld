@@ -21,8 +21,9 @@
           %a{:href => "/announces"} Annonces
         %li|
         %li
-          %a{:href => "#messages"} Messages
-        %li.notification 12
+          %a{:href => "/messages"} Messages
+        %li.notification
+          = current_user.mailbox[:inbox].unread_mail.size
 
       - else
         %li#l-home

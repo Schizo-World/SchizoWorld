@@ -1,3 +1,4 @@
+include ActsAsMessageable
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
@@ -8,6 +9,8 @@ class User < ActiveRecord::Base
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
+
+  acts_as_messageable
 
   set_table_name 'users'
   

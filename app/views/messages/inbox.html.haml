@@ -1,0 +1,26 @@
+%br
+%br
+%br
+%br
+%h1 Messages reçus
+
+%br
+- if @mailbox.latest_mail.nil? || @mailbox.latest_mail.empty?
+  %p Aucun nouveau message.
+- else
+  %h2 Messages
+  %table
+
+    %tr
+    - @mailbox.latest_mail.each do |mail|
+      %tr
+        %td
+          - if !mail.read
+            %span{:class => 'ui-icon ui-icon-bullet'} 
+        %td{:style=>"padding-right: 40px"}= mail.message.sender.login
+        %td= link_to mail.message.body, "messages/show/" + mail.id.to_s
+
+%br
+
+
+= render :partial => "new_button"

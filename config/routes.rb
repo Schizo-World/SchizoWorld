@@ -32,6 +32,15 @@ Schizoworld::Application.routes.draw do
   match '/auth/failure', :to => 'sessions#failure'
 
   match 'profile' => 'users#index', :as => :profile
+
+  match '/messages' => 'messages#create', :via => :post
+  match '/messages', :to => 'messages#inbox'
+  get 'messages/autocomplete_user_login'
+  match '/messages/show/:id', :to => 'messages#show'
+  match '/messages/inbox', :to => 'messages#inbox'
+  match '/messages/sentbox', :to => 'messages#sentbox'
+  match '/messages/trash', :to => 'messages#trash'
+  match '/messages/new', :to => 'messages#new'
   
   #project
   match ':controller(/:action(/:id(.:format)))'

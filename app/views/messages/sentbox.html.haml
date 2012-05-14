@@ -1,0 +1,24 @@
+%br
+%br
+%br
+%br
+%h1 Messages envoyés
+
+- if @messages.nil? || @messages.empty?
+  %p Aucun nouveau message.
+- else
+  %table
+    %tr
+      %th
+      %th
+      %th
+    %tr
+    - @messages.each do |message|
+      %tr
+        %td= link_to 'Show', message
+        %td
+        %td
+
+
+
+= render :partial => "new_button"

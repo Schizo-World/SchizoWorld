@@ -1,0 +1,13 @@
+%br
+%br
+%br
+%br
+
+-if @mail.empty?
+  %p
+    Aucun message !
+  %ul
+    %li
+      =link_to("Nouveau", "/mail/new")
+-else
+  =render :partial => 'messages/show', :collection => @mail

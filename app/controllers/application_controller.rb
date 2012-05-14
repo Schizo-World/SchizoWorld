@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
 	include AuthenticatedSystem
+	include ActsAsMessageable
 
 	protect_from_forgery
 

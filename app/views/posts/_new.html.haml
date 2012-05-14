@@ -4,7 +4,7 @@
       = image_tag current_user.url_img << "=small", :alt => current_user.login, :class => "left"
     - else
       = image_tag current_user.avatar.url(:small), :class => "left"
-  = form_for([@project, @post], :remote => true) do |f|
+  = form_for([@project, @post], :type => "html") do |f|
     -if @post.errors.any?
       #error_explanation
         %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"

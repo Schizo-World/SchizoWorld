@@ -1,0 +1,4 @@
+<%= link_to 'Nouveau message', "#", :onclick => "$('#new_message_box').toggle()", :class => "new_message" %>
+<div id="new_message_box" style="display:none"> 
+	<%= render :partial => "form" %>
+</div>

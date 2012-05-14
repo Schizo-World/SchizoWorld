@@ -8,4 +8,3 @@
 //= require jquery_ujs
 //= require h5bp
 //= require_tree .
-

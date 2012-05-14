@@ -70,4 +70,14 @@ class UsersController < ApplicationController
     redirect_to edit_user_path(@user)
   end
 
+  def mail
+    type = "inbox"
+    if params[:type] == "sent"
+      type = params[:type]
+    end
+    @user = current_user
+    @mail = @user.mailbox[type].latest_mail
+    render "messages/index", :locales => {:box => type}
+  end
+
 end

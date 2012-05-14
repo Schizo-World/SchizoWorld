@@ -1,6 +1,6 @@
 <div class="subscription popup_subscription">
 	<div id="signup">
-		<h1>Sign up as a new user</h1>
+		<h1>Inscrivez-vous</h1>
 		<div class="left" id="description">
 			<p>Vous enregistrez vous permet de : </p>
 			<ul>
@@ -11,14 +11,14 @@
 		</div>
 		<div class="right">
 			<div id="instant_signup">
-				<h3>Instant Sign up</h3>
+				<h3>Inscription instantanée</h3>
 				<a href="auth/facebook/"><img src="img/facebook.png" alt="Facebook" /></a>
 				<!--<a href="auth/twitter/"><img src="img/twitter.png" alt="Twitter" /></a>
 				<a href="auth/google/"><img src="img/google.png" alt="Google" /></a>-->
 			</div>
 
 			<div id="normal_signup">
-				<h3>Normal Sign up</h3>
+				<h3>Inscription standard</h3>
 				<% @user.password = nil %>
 				<% @user.password_confirmation = nil %>
 
@@ -31,16 +31,24 @@
 				<% end %>
 				<%= form_for :user, :url => users_path do |f| -%>
 				<p><%= label_tag 'login' %>
-				<%= f.text_field :login %></p>
+				<%= f.text_field :login %>
+			    <div class="clear"></div>
+			    </p>
 
 				<p><%= label_tag 'email' %>
-				<%= f.text_field :email %></p>
+				<%= f.text_field :email %>
+                <div class="clear"></div>
+			    </p>
 
 				<p><%= label_tag 'mot de passe' %>
-				<%= f.password_field :password %></p>
+				<%= f.password_field :password %>
+			    <div class="clear"></div>
+			    </p>
 
-				<p><%= label_tag 'password_confirmation', 'confirmation du mot de passe' %>
-				<%= f.password_field :password_confirmation %></p>
+				<p><%= label_tag 'password_confirmation', 'Confirmation du mot de passe' %>
+				<%= f.password_field :password_confirmation %>
+				<div class="clear"></div>
+			    </p>
 
 				<p><%= submit_tag "S'inscrire" %></p>
 				<% end -%>

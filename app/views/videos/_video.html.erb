@@ -1,0 +1,11 @@
+<% if !children['children'].empty? %>
+  <ul>
+    <% children['children'].each do |c| %>
+      <li>
+        <%= c['title'] %>
+        <%= radio_button_tag 'parent_id', c['id'] %>
+        <%= render :partial => "video", :locals => {:children => c} %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

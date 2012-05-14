@@ -26,7 +26,7 @@
   <%=render :partial => "footer"%>
   
   <script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-  <script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+  <script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>      
 
   <!-- scripts concatenated and minified via ant build script-->
   <script defer src="/js/plugins.js"></script>
@@ -50,6 +50,8 @@
 	      return false;
 	    }
 	  });
+
+    
 
         $("#member_1").click(function() {
         $("div.member_1").attr('style','left:1200px');

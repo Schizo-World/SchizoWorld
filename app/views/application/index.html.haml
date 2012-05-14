@@ -11,50 +11,22 @@
           #tree_man
         #tree_info
           #tree_description
-            %p Description du clicked node!
+            %img#tree_description_pic{:height => "100px", :src => "system/avatar_projects/1/medium/Anonymous.jpg"}/
+            %h4#tree_description_title Titre de la vidéo
+            %p#tree_description_text Description du clicked node!
           #tree_search
             %p Filtres pour la recherche
           #tree_results
+            %h3 RESULTATS VIDEOS
             %br/
-            RESULTATS
+            = render :partial => "videos/show_all"
+            %a{:href => "javascript:displayNewNode(2)"} Node2
             %br/
-            DE
+            %a{:href => "javascript:displayNewNode(3)"} Node3
             %br/
-            LA
+            %a{:href => "javascript:displayNewNode(4)"} Node4
             %br/
-            RECHERCHE
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
-            %br/
-            sasasasa
+            %a{:href => "javascript:displayNewNode(5)"} Node5
     %section#project.center_content_wrapper
       .center_wrapper
         %h3 It's a small schizophrenic world

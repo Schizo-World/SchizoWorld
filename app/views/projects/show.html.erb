@@ -1,5 +1,5 @@
 
-  <% if params[:public] == nil %>
+  <% if ((@project.users.include? (current_user)) && (!params.has_key?(:public))) %>
     <%= render 'privateProject' %>
   <% else %>
     <%= render 'publicProject' %>

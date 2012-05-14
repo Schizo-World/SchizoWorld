@@ -20,7 +20,14 @@
           <img src="/img/icons/file.png" alt="" class="left"/>
           <p><%=link_to 'Voir la fiche publique', :controller => "projects", :action => "show", :public => true%></p>
         </div>
-      <br/><br/>
+        <% video = Video.where("project_id = ?", @project.id) %>
+        <% if video.blank? %>
+          <div class="info">
+            <img src="/img/icons/film.png" alt="" class="left"/>
+            <p><%=link_to 'Ajouter la vidéo', :controller => "videos", :action => "new", :project_id => @project.id%></p>
+          </div>
+        <% end %>
+        <br/><br/>
       <% end %>
 
       <% if @project.city %>
@@ -57,9 +64,9 @@
               <li class="active">
                 <a alt="#communicate" class="tab_menu"> Communiquer </a>
               </li>
-              <li>
+              <!--<li>
                 <a alt="#doc" class="tab_menu"> Documents </a>
-              </li>
+              </li>-->
               <li>
                 <a alt="#ad" class="tab_menu"> Nos annonces </a>
               </li>

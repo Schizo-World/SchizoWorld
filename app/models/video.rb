@@ -14,7 +14,6 @@ class Video < ActiveRecord::Base
       false
     end
   end
-  
     
   def self.yt_session
     @yt_session ||= YouTubeIt::Client.new(:username => YouTubeITConfig.username , :password => YouTubeITConfig.password , :dev_key => YouTubeITConfig.dev_key)    

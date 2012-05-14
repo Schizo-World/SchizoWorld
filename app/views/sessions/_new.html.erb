@@ -1,20 +1,24 @@
 <div class="subscription popup_login">
 	<div id="signup" class="login">
-		<h1>Login</h1>
+		<h1>Connectez-vous</h1>
 		<div id="instant_signup">
-			<h3>Instant Login</h3>
-			<a href="auth/facebook/"><img src="img/facebook.png" alt="Facebook" /></a>
+			<h3>Connexion instantanée</h3>
+			<a href="auth/facebook/"><img src="/img/facebook.png" alt="Facebook" /></a>
 		</div>
 
 		<div id="normal_signup">
-			<h3>Normal Login</h3>
+			<h3>Connexion standard</h3>
 
 			<%= form_tag session_path do -%>
 			<p><%= label_tag 'login' %>
-			<%= text_field_tag 'login', @login %></p>
+			<%= text_field_tag 'login', @login %>
+			<div class="clear"></div>
+		    </p>
 
 			<p><%= label_tag 'Mot de passe' %>
-			<%= password_field_tag 'password', nil %></p>
+			<%= password_field_tag 'password', nil %>
+			<div class="clear"></div>
+		    </p>
 
 			<!-- Uncomment this if you want this functionality
 			<p><%= label_tag 'remember_me', 'Remember me' %>

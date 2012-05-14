@@ -41,6 +41,7 @@ class PostsController < ApplicationController
     @post.user = current_user
     @post.save
     redirect_to @post.project
+    
     #if @post.save
     #  respond_with do |format|
     #    format.html do

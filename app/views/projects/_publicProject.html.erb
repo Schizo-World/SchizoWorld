@@ -1,7 +1,17 @@
 <div id="sky">
   <div id="container" class="socialContainer">
-    <a href="<%= project_path(@project) %>"><%= image_tag @project.avatar_project.url(:large), :class => "img_sheet" %></a>
-    <h1><a href="<%= project_path(@project) %>"><%= @project.name %></a></h1>
+    <% if !current_user.nil? %>
+      <a href="<%= project_path(@project) %>"><%= image_tag @project.avatar_project.url(:large), :class => "img_sheet" %></a>
+    <% else %>
+      <%= image_tag @project.avatar_project.url(:large), :class => "img_sheet" %>
+    <% end %>
+    <h1>
+      <% if !current_user.nil? %>
+        <a href="<%= project_path(@project) %>"><%= @project.name %></a>
+      <% else %>
+        <%= @project.name %>
+      <% end %>
+    </h1>
 
     <div class="left info_sup">
       <% if @project.city %>
@@ -50,9 +60,13 @@
 
       <div id="content">
         <p id="notice"><%= notice %></p>
-
         <div id="project_video" class="tab_content">
-          <p>video</p>
+          <% @video = Video.first(:conditions => {:project_id => @project.id}) %>
+          <% if !@video.blank? %>
+            <%= render :partial => "videos/show", :locals => {:video => @video, :project => @project } %>
+          <% else %>
+            <p>Aucune vidéo n'a encore été postée</p>
+          <% end %>
         </div>
 
         <div id="project_description" class="tab_content hidden">
@@ -80,9 +94,11 @@
                         <p class="send_mail"><img src="#" alt=""/>
                           <% candidates = AnnounceCandidate.where("announce_id = ?", announce.id) %>
                           <% postulated = false %>
-                          <% for candidate in candidates %>
-                            <% if candidate.author_id == current_user.id %>
-                              <% postulated = true %>
+                          <% if !current_user.nil? %>
+                            <% for candidate in candidates %>
+                              <% if candidate.author_id == current_user.id %>
+                                <% postulated = true %>
+                              <% end %>
                             <% end %>
                           <% end %>
                           <% if postulated == false %>

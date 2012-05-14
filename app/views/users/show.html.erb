@@ -6,12 +6,24 @@
 
 <div id="sky">
   <div id="container" class="socialContainer">
-    <% if @user.url_img != nil%>
-      <a href="<%= :profile %>"><%= image_tag @user.url_img + "=large", :alt => @user.login, :class => "img_sheet" %></a>
-      <% else %>
-      <a href="<%= :profile %>"><%= image_tag @user.avatar.url(:large), :class => "img_sheet" %></a>
+    <% if !current_user.nil? %>
+      <a href="<%= :profile %>">
     <% end %>
-    <h1><a href="<%= :profile %>"><%= @user.login %></a></h1>
+      <% if @user.url_img != nil%>
+        <%= image_tag @user.url_img + "=large", :alt => @user.login, :class => "img_sheet" %>
+        <% else %>
+        <%= image_tag @user.avatar.url(:large), :class => "img_sheet" %>
+      <% end %>
+    <% if !current_user.nil? %>
+      </a>
+    <% end %>
+    <h1>
+      <% if !current_user.nil? %>
+        <a href="<%= :profile %>"><%= @user.login %></a>
+      <% else %>
+        <%= @user.login %>
+      <% end %>
+    </h1>
     <div id="jobs">
       <% for job in @user.jobs.where("project_id IS NULL")%>
             <span>#<%= job.label %></span>
@@ -19,17 +31,17 @@
       </div>
 
     <div class="left info_sup">
-            <% if current_user.id == @user.id %>
+      <% if !current_user.nil? && current_user.id == @user.id %>
         <div class="info">
           <img src="/img/icons/pencil.png" alt="" class="left"/>
           <p><%=link_to 'Editer mon profil', edit_user_path(@user)%></p>
         </div>
         <div class="info">
-          <img src="/img/icons/pencil.png" alt="" class="left"/>
+          <img src="/img/icons/add_project.png" alt="" class="left"/>
           <p><%= link_to "Create a project", "#form_new_project", :class => "popup"%></p>
         </div>
-            <% end %>
-            <br/><br/>
+      <% end %>
+      <br/><br/>
 
       <% if !@user.location.nil? && !@user.location.empty?%>
         <div class="info">
@@ -68,13 +80,17 @@
                 <a alt="#projects_overed" class="tab_menu"> Projets terminés </a>
               </li>
               <li>
-                <a alt="#ad" class="tab_menu"> Mes annonces </a>
+                <% if !current_user.nil? %>
+                  <a alt="#ad" class="tab_menu"> Mes annonces </a>
+                <% else %>
+                  <a alt="#ad" class="tab_menu"> Ses annonces </a>
+                <% end %>
               </li>
             </ul>
           </div>
           <div id="content">
                 <div id="projects_in_progress" class="tab_content">
-          <% for project in @user.projects.order("created_at DESC") %>
+                <% for project in @user.projects.where("status = ?", "Etat zero").order("created_at DESC") %>
                   <div class="project_list">
                     <% admin = false %>
                     <% members = @user.projects.where("admin = ?", true) %>
@@ -84,7 +100,7 @@
                       <% end %>
                     <% end %>
                     <% if admin == true %>
-                      <p class="right"><img src="/img/icons/admin.png" alt="admin" width="20px"/>Administrateur</p>
+                      <p class="right"><img src="/img/icons/admin.png" alt="admin" width="20px"/> Administrateur</p>
                     <% end %>
                     <a href="<%= project_path(project) %>"><%= image_tag project.avatar_project.url(:large), :class => "left" %></a>
                     <div>
@@ -98,17 +114,41 @@
         </div>
 
         <div id="projects_overed" class="tab_content hidden">
-          <p>projects_overed</p>
+          <% for project in @user.projects.where("status = ?", "Fini").order("created_at DESC") %>
+            <div class="project_list">
+              <% admin = false %>
+              <% members = @user.projects.where("admin = ?", true) %>
+              <% for member in members %>
+                <% if member.id == @user.id %>
+                  <% admin = true %>
+                <% end %>
+              <% end %>
+              <% if admin == true %>
+                <p class="right"><img src="/img/icons/admin.png" alt="admin" width="20px"/> Administrateur</p>
+              <% end %>
+              <a href="<%= project_path(project) %>"><%= image_tag project.avatar_project.url(:large), :class => "left" %></a>
+              <div>
+                  <h3><%= link_to project.name, project_path(project) %></h3>
+                <p><%= truncate(project.description, :length => 200, :omission => '...') %></p>
+                <p class="send_mail"><img src="/img/icons/send_mail.png" width="25px" alt=""/><a href="#">Envoyer un message</a></p>
+            </div>
+                <div class="clear"></div>
+            </div>
+            <% end %>
         </div>
 
         <div id="ad" class="tab_content hidden">
-          <% if current_user.id == @user.id %>
+          <% if !current_user.nil? && current_user.id == @user.id %>
             <%= render :partial => "announces/new", :locals => {:@announce => Announce.new, :@author_type => '0', :@author_id => @user.id} %>
           <% end %>
           <div class="clear"></div>
           <%if !@announces.blank?%>
               <div id="announces">
+                <% if !current_user.nil? %>
                   <h4>Mes annonces</h4>
+                <% else %>
+                  <h4>Ses annonces</h4>
+                <% end %>
                     <% for announce in @announces %>
                       <% candidates = AnnounceCandidate.where("announce_id = ?", announce.id) %>
                       <% singular_sentence = "candidat a postulé" %>
